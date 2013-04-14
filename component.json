@@ -1,0 +1,15 @@
+{
+  "author": "will Farrell",
+  "name": "angular-io",
+  "description": "AngularIO - Companion Suite for AngularJS",
+  "version": "0.0.1",
+  "homepage": "http://github.com/willfarrell/angular-io",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/willfarrell/angular-io.git"
+  },
+  "main": "./dist/angular-io.min.js",
+  "dependencies": {
+    "angular": ">= 1.0.5"
+  }
+}
