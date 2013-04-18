@@ -1,28 +1,45 @@
+/*
+TODO
+- add in locale strings
+- custom date format
+- option to use 'd' instead of 'day', showthand
+*/
+
 angular.module('io.filters')
 .filter('durationToPast', function() {
 	return function(timestamp) {
-		var now = +new Date(), Seconds = (now - timestamp)/1000;
+		var now = +new Date(),
+			Seconds = (now - timestamp)/1000,
+			date = new Date(),
+			dow = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+		
 		if (Seconds < 0) { Seconds *= -1; }
 		var Days = Math.floor(Seconds / 86400);
 		Seconds -= Days * 86400;
+		
 		if (Days && Days === 1) {
-			return 'yesterday hh:mm';
+			date = new Date(now - Days * 86400 * 1000);
+			return 'yesterday '+date.getHours()+':'+date.getMinutes();
 		} else if (Days && Days < 7) {
-			return 'day_of_the_week hh:mm';
+			date = new Date(now - Days * 86400 * 1000);
+			return dow[date.getDay()]+' '+date.getHours()+':'+date.getMinutes();
 		} else if (Days) {
-			return 'YYYY MMM DD hh:mm';
+			date = new Date(now - Days * 86400 * 1000);
+			return date.getFullYear()+' '+date.getMonth()+' '+date.getDay()+' '+date.getHours()+':'+date.getMinutes();
 		}
+		
 		var Hours = Math.floor(Seconds / 3600);
 		Seconds -= Hours * (3600);
 		if (Hours && Hours > 3) {
 			return 'hh:mm';
 		} else if (Hours) {
-			return (Hours > 1) ? Hours + ' hours ': Hours + ' hour ';
+			return (Hours > 1) ? Hours + ' hours': Hours + ' hour';
 		}
 		var Minutes = Math.floor(Seconds / 60);
 		Seconds -= Minutes * (60);
-		if (Minutes > 0) { return (Minutes > 1) ? Minutes + ' minutes ': Minutes + ' minute '; }
-		if (Seconds > 0) { return (Seconds > 1) ? Seconds + ' seconds ': Seconds + ' second '; }
+		Seconds = Math.floor(Seconds);
+		if (Minutes > 0) { return (Minutes > 1) ? Minutes + ' minutes': Minutes + ' minute'; }
+		if (Seconds >= 1) { return (Seconds > 1) ? Seconds + ' seconds': Seconds + ' second'; }
 		return 'zero';
 
 	};
@@ -33,14 +50,15 @@ angular.module('io.filters')
 		if (Seconds < 0) { Seconds *= -1; }
 		var Days = Math.floor(Seconds / 86400);
 		Seconds -= Days * 86400;
-		if (Days > 0) { return (Days > 1) ? Days + ' days ': Days + ' day '; }
+		if (Days > 0) { return (Days > 1) ? Days + ' days': Days + ' day'; }
 		var Hours = Math.floor(Seconds / 3600);
 		Seconds -= Hours * (3600);
-		if (Hours > 0) { return (Hours > 1) ? Hours + ' hours ': Hours + ' hour '; }
+		if (Hours > 0) { return (Hours > 1) ? Hours + ' hours': Hours + ' hour'; }
 		var Minutes = Math.floor(Seconds / 60);
 		Seconds -= Minutes * (60);
-		if (Minutes > 0) { return (Minutes > 1) ? Minutes + ' minutes ': Minutes + ' minute '; }
-		if (Seconds > 0) { return (Seconds > 1) ? Seconds + ' seconds ': Seconds + ' second '; }
+		Seconds = Math.floor(Seconds);
+		if (Minutes > 0) { return (Minutes > 1) ? Minutes + ' minutes': Minutes + ' minute'; }
+		if (Seconds >= 1) { return (Seconds > 1) ? Seconds + ' seconds': Seconds + ' second'; }
 		return 'zero';
 	};
 });

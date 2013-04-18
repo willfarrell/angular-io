@@ -8,8 +8,8 @@
     "type": "git",
     "url": "git://github.com/willfarrell/angular-io.git"
   },
-  "main": "./dist/angular-io.min.js",
   "dependencies": {
-    "angular": ">= 1.0.5"
+    "angular": ">= 1.0.5",
+    "angular-mocks": ">= 1.0.5"
   }
 }

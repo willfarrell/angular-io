@@ -1,45 +1,6 @@
 /*global syncObject:true, syncArray:true */
 
-function format(string, mask) {
-	if (!string) {
-		return string; // string undefined
-	}
-	mask = mask || 'w';
-	var defs = {
-		'9': '[0-9]',
-		'a': '[A-Za-z]',
-		'*': '[A-Za-z0-9]',
-		// regex
-		'w': '[\\w]',
-		'W': '[\\W]',
-		's': '[\\s]',
-		'S': '[\\S]',
-		'd': '[\\d]',
-		'D': '[\\D]'
-	};
-	var output = '';
-	var string_pos = 0;
-	var mask_pos = 0;
-	string.toString().split('');
-	mask.split('');
-	while (mask_pos < mask.length && string_pos < string.length) {
-		var s = string[string_pos];
-		var f = mask[mask_pos];
-		if (defs[f]) {
-			var regex = new RegExp(defs[f]);
-			if (regex.exec(s)) {
-				output += s;
-				mask_pos++;
-			}
-			string_pos++;
-		} else {
-			output += f;
-			mask_pos++;
-		}
 
-	}
-	return output;
-}
 
 // pop ups //
 // Universal clipboard button - ** move to general phonegap fct

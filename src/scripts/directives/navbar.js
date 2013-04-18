@@ -5,7 +5,7 @@ Remove when commited to AngularStrap
 
 */
 
-angular.module('$strap.directives')
+angular.module('io.directives')
 
 .directive('bsNavbar', ['$location', function($location) {
   'use strict';
@@ -25,7 +25,7 @@ angular.module('$strap.directives')
           var $li = angular.element(li[i]),
             // data('match-rout') does not work with dynamic attributes
             pattern = $li.attr('data-match-route'),
-            regexp = new RegExp('^' + pattern + '$', ["i"]);
+            regexp = new RegExp('^' + pattern + '$', ['i']);
 
           if(regexp.test(newValue)) {
             $li.addClass('active');
