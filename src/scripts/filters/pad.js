@@ -11,4 +11,4 @@ angular.module('io.filters')
 		}
 		return string;
 	};
-})
+});

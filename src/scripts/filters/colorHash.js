@@ -10,4 +10,4 @@ angular.module('io.filters')
 				((hash>>8)&0xFF).toString(16) +
 				(hash&0xFF).toString(16);
 	};
-})
+});

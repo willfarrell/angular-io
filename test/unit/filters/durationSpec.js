@@ -5,8 +5,6 @@ describe('duration', function() {
 
   beforeEach(module('io.filters'));
   beforeEach(inject(function($filter) {
-    durationToPastFilter = $filter('durationToPast');
-    durationToFutureFilter = $filter('durationToFuture');
     durationFilter = $filter('duration');
   }));
   
@@ -14,7 +12,7 @@ describe('duration', function() {
   
   it('should return the duration from now to the past', function() {
   	now = +new Date();
-    expect(durationFilter((now - 0 * 1000))).toEqual('zero');
+    expect(durationFilter((now - 0 * 1000))).toEqual('');
     expect(durationFilter((now - 1 * 1000))).toEqual('1 second');
     expect(durationFilter((now - 2 * 1000))).toEqual('2 seconds');
     expect(durationFilter((now - 1 * 60 * 1000))).toEqual('1 minute');
@@ -36,7 +34,7 @@ describe('duration', function() {
   
   it('should return the duration from now to the future', function() {
   	now = +new Date();
-    expect(durationFilter((now + 0 * 1000))).toEqual('zero');
+    expect(durationFilter((now + 0 * 1000))).toEqual('');
     expect(durationFilter((now + 1 * 1000))).toEqual('1 second');
     expect(durationFilter((now + 5 * 1000))).toEqual('5 seconds');
     expect(durationFilter((now + 1 * 60 * 1000))).toEqual('1 minute');
