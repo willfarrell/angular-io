@@ -13,8 +13,10 @@ describe('duration', function() {
   it('should return the duration from now to the past', function() {
   	now = +new Date();
     expect(durationFilter((now - 0 * 1000))).toEqual('');
+    now = +new Date();
     expect(durationFilter((now - 1 * 1000))).toEqual('1 second');
-    expect(durationFilter((now - 2 * 1000))).toEqual('2 seconds');
+    now = +new Date();
+    expect(durationFilter((now - 5 * 1000))).toEqual('5 seconds');
     expect(durationFilter((now - 1 * 60 * 1000))).toEqual('1 minute');
     expect(durationFilter((now - 2 * 60 * 1000))).toEqual('2 minutes');
     expect(durationFilter((now - 1 * 60 * 60 * 1000))).toEqual('1 hour');
@@ -31,18 +33,20 @@ describe('duration', function() {
     expect(durationFilter((now - 7 * 24 * 60 * 60 * 1000))).toEqual(date.getFullYear()+' '+date.getMonth()+' '+date.getDay()+' '+date.getHours()+':'+date.getMinutes());
   });
   
-  
+  // since this is related to future, slower computers may fail here (+1sec to counter this)
   it('should return the duration from now to the future', function() {
   	now = +new Date();
     expect(durationFilter((now + 0 * 1000))).toEqual('');
+    now = +new Date();
     expect(durationFilter((now + 1 * 1000))).toEqual('1 second');
+    now = +new Date();
     expect(durationFilter((now + 5 * 1000))).toEqual('5 seconds');
-    expect(durationFilter((now + 1 * 60 * 1000))).toEqual('1 minute');
-    expect(durationFilter((now + 2 * 60 * 1000))).toEqual('2 minutes');
-    expect(durationFilter((now + 1 * 60 * 60 * 1000))).toEqual('1 hour');
-    expect(durationFilter((now + 2 * 60 * 60 * 1000))).toEqual('2 hours');
-    expect(durationFilter((now + 1 * 24 * 60 * 60 * 1000))).toEqual('1 day');
-    expect(durationFilter((now + 2 * 24 * 60 * 60 * 1000))).toEqual('2 days');
+    expect(durationFilter((now + 1 * 60 * 1000 + 5000))).toEqual('1 minute');
+    expect(durationFilter((now + 2 * 60 * 1000 + 5000))).toEqual('2 minutes');
+    expect(durationFilter((now + 1 * 60 * 60 * 1000 + 5000))).toEqual('1 hour');
+    expect(durationFilter((now + 2 * 60 * 60 * 1000 + 5000))).toEqual('2 hours');
+    expect(durationFilter((now + 1 * 24 * 60 * 60 * 1000 + 5000))).toEqual('1 day');
+    expect(durationFilter((now + 2 * 24 * 60 * 60 * 1000 + 5000))).toEqual('2 days');
     //expect(durationFilter((now + 7 * 24 * 60 * 60 * 1000))).toEqual('1 week');
     //expect(durationFilter((now + 14 * 24 * 60 * 60 * 1000))).toEqual('2 weeks');
     //expect(durationFilter((now + 30 * 24 * 60 * 60 * 1000))).toEqual('1 month');
