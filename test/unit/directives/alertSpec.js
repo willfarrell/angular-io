@@ -1,3 +1,5 @@
+/*globals describe:true, beforeEach:true, afterEach:true, spyOn:true, inject:true, it:true, expect:true */
+
 'use strict';
 
 describe('alert', function () {
@@ -76,7 +78,7 @@ describe('alert', function () {
 
   it('should correctly remove alert from deep stack', function() {
     var elm = compileDirective('deepAlertStack');
-    $("button", elm).click();
+    $('button', elm).click();
     expect(scope.deep.alerts.length).toBe(0);
   });
 });

@@ -1,7 +1,9 @@
+/*globals describe:true, beforeEach:true, inject:true, it:true, expect:true */
+
 describe('duration', function() {
   var durationFilter,
-  	  now,
-  	  dow = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];;
+      now, date,
+      dow = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
   beforeEach(module('io.filters'));
   beforeEach(inject(function($filter) {
@@ -11,7 +13,7 @@ describe('duration', function() {
   date = new Date();
   
   it('should return the duration from now to the past', function() {
-  	now = +new Date();
+    now = +new Date();
     expect(durationFilter((now - 0 * 1000))).toEqual('');
     now = +new Date();
     expect(durationFilter((now - 1 * 1000))).toEqual('1 second');
@@ -35,7 +37,7 @@ describe('duration', function() {
   
   // since this is related to future, slower computers may fail here (+1sec to counter this)
   it('should return the duration from now to the future', function() {
-  	now = +new Date();
+    now = +new Date();
     expect(durationFilter((now + 0 * 1000))).toEqual('');
     now = +new Date();
     expect(durationFilter((now + 1 * 1000))).toEqual('1 second');

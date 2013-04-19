@@ -1,3 +1,5 @@
+/*globals describe:true, beforeEach:true, inject:true, it:true, expect:true */
+
 describe('colorHash', function() {
   var colorHashFilter;
 
