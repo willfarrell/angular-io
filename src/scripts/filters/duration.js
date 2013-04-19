@@ -1,65 +1,69 @@
 /*
 TODO
+- pass now clock into filter???
+- week/month option
 - add in locale strings
 - custom date format
 - option to use 'd' instead of 'day', showthand
+- passin complete fucntion / str??
 */
 
 angular.module('io.filters')
-.filter('durationToPast', function() {
+.filter('duration', function() {
 	return function(timestamp) {
 		var now = +new Date(),
 			Seconds = (now - timestamp)/1000,
 			date = new Date(),
-			dow = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+			dow = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+			past = (timestamp < now); // is timestamp in the past?
 		
 		if (Seconds < 0) { Seconds *= -1; }
+		
+		// month
+		
+		// week
+		
+		// day
 		var Days = Math.floor(Seconds / 86400);
 		Seconds -= Days * 86400;
 		
-		if (Days && Days === 1) {
+		if (past) {
 			date = new Date(now - Days * 86400 * 1000);
-			return 'yesterday '+date.getHours()+':'+date.getMinutes();
-		} else if (Days && Days < 7) {
-			date = new Date(now - Days * 86400 * 1000);
-			return dow[date.getDay()]+' '+date.getHours()+':'+date.getMinutes();
-		} else if (Days) {
-			date = new Date(now - Days * 86400 * 1000);
-			return date.getFullYear()+' '+date.getMonth()+' '+date.getDay()+' '+date.getHours()+':'+date.getMinutes();
+			if (Days === 1) {
+				return 'yesterday '+date.getHours()+':'+date.getMinutes();
+			} else if (Days && Days < 7) {
+				return dow[date.getDay()]+' '+date.getHours()+':'+date.getMinutes();
+			} else if (Days) {
+				return date.getFullYear()+' '+date.getMonth()+' '+date.getDay()+' '+date.getHours()+':'+date.getMinutes();
+			}
+		} else if (Days > 1) {
+			return Days + ' days';
+		} else if (Days === 1) {
+			return Days + ' day';
 		}
 		
+		// hour
 		var Hours = Math.floor(Seconds / 3600);
 		Seconds -= Hours * (3600);
-		if (Hours && Hours > 3) {
-			return 'hh:mm';
-		} else if (Hours) {
-			return (Hours > 1) ? Hours + ' hours': Hours + ' hour';
+		
+		if (past && Hours > 3) {
+			return date.getHours()+':'+date.getMinutes();
+		} else if (Hours > 1) {
+			return Hours + ' hours';
+		} else if (Hours === 1) {
+			return Hours + ' hour';
 		}
+		
+		// min
 		var Minutes = Math.floor(Seconds / 60);
 		Seconds -= Minutes * (60);
-		Seconds = Math.floor(Seconds);
 		if (Minutes > 0) { return (Minutes > 1) ? Minutes + ' minutes': Minutes + ' minute'; }
-		if (Seconds >= 1) { return (Seconds > 1) ? Seconds + ' seconds': Seconds + ' second'; }
-		return 'zero';
-
-	};
-})
-.filter('durationToFuture', function() {
-	return function(timestamp) {
-		var now = +new Date(), Seconds = (timestamp - now)/1000;
-		if (Seconds < 0) { Seconds *= -1; }
-		var Days = Math.floor(Seconds / 86400);
-		Seconds -= Days * 86400;
-		if (Days > 0) { return (Days > 1) ? Days + ' days': Days + ' day'; }
-		var Hours = Math.floor(Seconds / 3600);
-		Seconds -= Hours * (3600);
-		if (Hours > 0) { return (Hours > 1) ? Hours + ' hours': Hours + ' hour'; }
-		var Minutes = Math.floor(Seconds / 60);
-		Seconds -= Minutes * (60);
+		
+		// sec
 		Seconds = Math.floor(Seconds);
-		if (Minutes > 0) { return (Minutes > 1) ? Minutes + ' minutes': Minutes + ' minute'; }
 		if (Seconds >= 1) { return (Seconds > 1) ? Seconds + ' seconds': Seconds + ' second'; }
-		return 'zero';
+		
+		return '';
 	};
 });
 

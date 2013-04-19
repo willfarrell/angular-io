@@ -116,22 +116,5 @@ function nl2br(str){
 	return str.replace( /\n/g, '<br />\n' );
 }
 
-function numberPadding(number, length){
-	var str = '' + number;
-	while (str.length < length) {
-		str = '0'+str;
-	}
-	return str;
-}
 
-// used to create unique color from string
-function strToARGB(str) {
-	var hash = 0;
-	for (var i = 0, l = str.length; i < l; i++) {
-		hash = str.charCodeAt(i) + ((hash << 5) - hash);
-	}
-	return ((hash>>24)&0xFF).toString(16) +
-			((hash>>16)&0xFF).toString(16) +
-			((hash>>8)&0xFF).toString(16) +
-			(hash&0xFF).toString(16);
-}
+

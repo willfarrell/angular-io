@@ -1,4 +1,5 @@
 // Testacular configuration
+// http://www.yearofmoo.com/2013/01/full-spectrum-testing-with-angularjs-and-testacular.html
 
 // base path, that will be used to resolve files and exclude
 basePath = '..';
