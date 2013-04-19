@@ -9,8 +9,8 @@ basePath = '..';
 // list of files / patterns to load in the browser
 files = [
   JASMINE, JASMINE_ADAPTER,
-  'src/components/angular/angular.js',
-  'src/components/angular-mocks/angular-mocks.js',
+  'test/lib/angular.js',
+  'test/lib//angular-mocks.js',
   
   'src/scripts/app.sample.js',
   'src/scripts/filters/*.js',
