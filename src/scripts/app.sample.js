@@ -29,6 +29,15 @@ angular.module('io.config', []).value('io.config', {
 	'json':{								// load json files into $rootScope.json[key] = JSON.parse(file);
 		'calling_codes'	:'calling_codes'	// {'country_code':'calling_code'}
 	},
+	'password':{				// As per OWASP
+		'min_length'	:10,	// OWASP:10
+		'min_subset'	:3,		// OWASP:3
+		'min_upper'		:1,		// OWASP:1
+		'min_lower'		:1,		// OWASP:1
+		'min_number'	:1,		// OWASP:1
+		'min_special'	:1,		// OWASP:1
+		'min_other'		:1		// OWASP:1
+	},
 	'account': {
 		'user_name'		:false,	// Require username in profile
 		'company'		:false,

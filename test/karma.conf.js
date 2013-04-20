@@ -19,13 +19,18 @@ files = [
   
   'src/scripts/app.sample.js',
   'src/scripts/lib/**/*.js',
-  'src/scripts/filters/*.js',
+  
   'src/scripts/directives/*.js',
-  'test/unit/filters/*.js'
+  'src/scripts/factories/*.js',
+  'src/scripts/filters/*.js',
+  
+  'test/unit/**/*.js'
 ],
 
 // list of files to exclude
-exclude = [],
+exclude = [
+	'test/unit/todo/*.js'
+],
 
 // use dots reporter, as travis terminal does not support escaping sequences
 // possible values: 'dots', 'progress', 'junit', 'teamcity'

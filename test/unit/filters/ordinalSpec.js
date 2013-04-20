@@ -2,7 +2,8 @@
 
 describe('ordinal', function() {
   var ordinalFilter;
-
+  
+  beforeEach(module('ngLocale'));
   beforeEach(module('io.filters'));
   beforeEach(inject(function($filter) {
     ordinalFilter = $filter('ordinal');
