@@ -12,13 +12,13 @@ This is a subset of [angular-io-app](https://github.com/willfarrell/angular-io-a
 
 ## Installation
 
-The repository comes with the modules pre-built and compressed into the `build/` directory.
+Include `io` in your app dependencies, and you're good to go.
 
-```javascript
+```js
 angular.module('app', ['io']);
 ```
 
-The modules can be found in the [Directives](https://github.com/willfarrell/angular-io/tree/master/src/scripts/directives) and [Filters](https://github.com/willfarrell/angular-io/tree/master/src/scripts/filters) folders. Check out the readme file associated with each module for specific module usage information.
+The modules can be found in the [Directives](https://github.com/willfarrell/angular-io/tree/master/src/scripts/directives) and [Filters](https://github.com/willfarrell/angular-io/tree/master/src/scripts/filters) folders.
 
 ## Development
 
@@ -50,15 +50,21 @@ $ grunt
 
 ## Modules
 ### Directives
-- 
+- inputMask (requires: $filter('format'))
+- passwordCheck
 
 ### Filters
-- colorHash (dev)
+- colorHash
 - duration
 - format
+- markdown
 - ordinal
 - pad
 - range
 - truncate
 
+## Contribs
+[@willfarrell](http://willfarrell.ca)
 
+## License
+Your choice of [Apache Public License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) / [MIT](http://opensource.org/licenses/MIT) / [GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.html).
