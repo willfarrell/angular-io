@@ -6,7 +6,7 @@ node_modules/*
 src/components/*
 src/font/*
 src/styles/bootstrap.css
-test/lib/*
+#test/lib/* # needed for travis-ci
 
 # Compiled source #
 ###################

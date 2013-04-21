@@ -42,7 +42,7 @@ $ npm install && bower install
 
 ### Setup Component Files
 
-Some components need to be compiled (ie Twitter Bootstrap) and moved into place (AngularJS, fonts).
+Some components need to be compiled (Twitter Bootstrap) and moved into place (AngularJS, fonts).
 
 ```bash
 $ grunt setup
