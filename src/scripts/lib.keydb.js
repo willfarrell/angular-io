@@ -1,7 +1,6 @@
 /*
 //== To Do ==//
 -add update fucntions
--merge [g|s]etAllArray and [g|s]etAllObject into one
 
 //== Important Notes ==//
 -JSON.parse() and JSON.stringify() are built-in
@@ -16,6 +15,8 @@ db.remove('key');
 db.clear();
 
 db.keyDB_name.get('key');
+db.keyDB_name.getAllArray('key', []);
+db.keyDB_name.getAllArray('key', function() {reutrn [];});
 db.keyDB_name.set('key', {});
 db.keyDB_name.remove('key');
 db.keyDB_name.clear();
@@ -32,12 +33,12 @@ if (storage) {
 }
 
 //= Creating a keyDB =//
-db.name = new keyDB(
-	"name",				// DB prefix for all keys
+db.name = keyDB(
+	"name",// DB prefix for all keys
 	{						// default object (optinal)
 		"key":"",
 		"value":"",
-		"timestamp":Date.now(),
+		"timestamp":Date.now()
 	}
 );
 
@@ -80,11 +81,14 @@ var db = {
 		//console.log(this.ls.getItem(key));
 		var result = this.ls.getItem(key);
 
-		if ( result === 'undefined' ) {
+		/*if ( result === 'undefined' ) {
 			return result;
-		} else {
+		}*/
+		if (result.match(/^[{\["]/)) {
 			return JSON.parse(result);
 		}
+		return result;
+
 		// if (result === typeof Object)
 	},
 
@@ -93,7 +97,9 @@ var db = {
 	*/
 	set: function(key, obj) {
 		//console.log("db.set('"+key+"', "+JSON.stringify(obj)+")");
-		if (key !== null) { this.ls.setItem(key, JSON.stringify(obj)); }
+		if (key !== null) {
+			this.ls.setItem(key, typeof(obj) === 'object' ? JSON.stringify(obj) : obj);
+		}
 	},
 
 	/**
@@ -129,21 +135,21 @@ function keyDB(id, default_obj) {
 
 keyDB.prototype.get = function(key, default_obj) {
 	//console.log("keyDB.get("+key+")");
-	return db.get(this.id+key, default_obj);
+	var obj = {};
+	if (typeof(default_obj) === 'function') { obj = default_obj(); }
+	else { obj = default_obj; }
+
+	return db.get(this.id+key, obj);
 };
 
 keyDB.prototype.set = function(key, obj) {
 	if (obj === 'undefined' || key === 'undefined') { return; }	// don't set undefined
 	//console.log("keyDB.set("+key+", ");
-	//console.log(obj);
-	//console.log(")");
 	db.set(this.id+key, obj);
 	// save key in keychain if not already there
 	var index = this.keys.indexOf(key);
-	//console.log(index);
 	if ( index === -1 ) { // if not in keys
 		this.keys.push(key);
-		//console.log(this.keys);
 		db.set(this.id+'keys', this.keys);
 	}
 };
@@ -162,14 +168,16 @@ keyDB.prototype.remove = function(key) {
  * list = [] - default container
  */
 keyDB.prototype.getAllArray = function(key, list_default) {
-	if (typeof(list_default) === 'function') { list_default = list_default(); }
-	var list = [];
+	var obj = [], list = [];
+	if (typeof(list_default) === 'function') { obj = list_default(); }
+	else { obj = list_default; }
+
 	for (var i = 0, l = this.keys.length; i < l; i++) {
 		list.push(this.get(this.keys[i]));
 	}
-	if (!list.length && key && list_default) {
-		this.setAllArray(key, list_default);
-		list = list_default;
+	if (!list.length && key && obj) {
+		this.setAllArray(key, obj);
+		list = obj;
 	}
 	return list;
 };
@@ -178,14 +186,16 @@ keyDB.prototype.getAllArray = function(key, list_default) {
  * list = {} - default container
  */
 keyDB.prototype.getAllObject = function(list_default) {
-	if (typeof(list_default) === 'function') { list_default = list_default(); }
-	var list = {};
+	var obj = {}, list = {};
+	if (typeof(list_default) === 'function') { obj = list_default(); }
+	else { obj = list_default; }
+
 	for (var i = 0, l = this.keys.length; i < l; i++) {
 		list[this.keys[i]] = this.get(this.keys[i]);
 	}
-	if (!list.length && list_default) {
-		this.setAllObject(list_default);
-		list = list_default;
+	if (!list.length && obj) {
+		this.setAllObject(obj);
+		list = obj;
 	}
 	return list;
 };
@@ -213,6 +223,20 @@ keyDB.prototype.setObject = function(list) {
 		}
 	}
 };
+
+
+/**
+ * list = [] or {} - default container
+ * key = string key name if list is array
+ */
+/*keyDB.prototype.setAll= function(list, key) {
+	this.clear();
+	if (typeof(list) === 'object') {
+		this.setObject(list);
+	} else if (key && typeof(list) === 'array') {
+		this.setArray(key, list);
+	}
+};*/
 
 /**
  * key = string key name

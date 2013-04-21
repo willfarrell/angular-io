@@ -1,4 +1,8 @@
 /*global */
+/*
+To Do
+check $setValidity(validationErrorKey, isValid) - http://docs.angularjs.org/api/ng.directive:ngModel.NgModelController
+*/
 
 angular.module('io.directives')
 .directive('passwordCheck', ['io.config', '$timeout', function(config_obj, $timeout) {

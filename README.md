@@ -59,14 +59,11 @@ $ grunt
 
 ## Modules
 ### Directives
-- alert (no tests) (bootstrap replacement)
 - inputMask (requires: $filter('format'))
-- modal (no tests) (bootstrap replacement)
 - passwordCheck
 - selectSize (no tests)
 - **To Do** 
  - signature
- - tabs (bootstrap replacement)
 
 ### Factories
 - fluid (no tests)
@@ -84,6 +81,12 @@ $ grunt
 - pad
 - range
 - truncate
+
+### Bootstrap
+- alert (no tests)
+- modal (no tests)
+- **To Do** 
+ - tabs
 
 ### Modules
 - 404 (no tests)

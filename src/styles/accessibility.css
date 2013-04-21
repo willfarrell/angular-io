@@ -7,41 +7,52 @@
    else                                                 */
 
 @font-face {
-    font-family: opendyslexic;
-    src: url(/font/OpenDyslexic-Regular.otf);
+    font-family: 'opendyslexic';
+    src: url('../font/OpenDyslexic-Regular.otf') format("opentype"),
+    	 url('../font/OpenDyslexic-Regular.eot?#iefix') format('embedded-opentype'),
+	     url('../font/OpenDyslexic-Regular.woff') format('woff'),
+	     url('../font/OpenDyslexic-Regular.ttf') format('truetype'),
+	     url('../font/OpenDyslexic-Regular.svg#svgFontName') format('svg');
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
-    font-family: opendyslexic;
-    src: url(/font/OpenDyslexic-Italic.otf);
+    font-family: 'opendyslexic';
+    src: url('../font/OpenDyslexic-Italic.otf') format("opentype"),
+    	 url('../font/OpenDyslexic-Italic.eot?#iefix') format('embedded-opentype'),
+	     url('../font/OpenDyslexic-Italic.woff') format('woff'),
+	     url('../font/OpenDyslexic-Italic.ttf') format('truetype'),
+	     url('../font/OpenDyslexic-Italic.svg#svgFontName') format('svg');
     font-style: italic;
     font-weight: normal;
 }
 
 @font-face {
-    font-family: opendyslexic;
-    src: url(/font/OpenDyslexic-Bold.otf);
+    font-family: 'opendyslexic';
+    src: url('../font/OpenDyslexic-Bold.otf') format("opentype"),
+    	 url('../font/OpenDyslexic-Bold.eot?#iefix') format('embedded-opentype'),
+	     url('../font/OpenDyslexic-Bold.woff') format('woff'),
+	     url('../font/OpenDyslexic-Bold.ttf') format('truetype'),
+	     url('../font/OpenDyslexic-Bold.svg#svgFontName') format('svg');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-    font-family: opendyslexic;
-    src: url(/font/OpenDyslexic-BoldItalic.otf);
+    font-family: 'opendyslexic';
+    src: url('../font/OpenDyslexic-BoldItalic.otf') format("opentype"),
+    	 url('../font/OpenDyslexic-BoldItalic.eot?#iefix') format('embedded-opentype'),
+	     url('../font/OpenDyslexic-BoldItalic.woff') format('woff'),
+	     url('../font/OpenDyslexic-BoldItalic.ttf') format('truetype'),
+	     url('../font/OpenDyslexic-BoldItalic.svg#svgFontName') format('svg');
     font-weight: bold;
     font-style: italic;
 }
 
-.accessibility * {
-   font-family: opendyslexic;
+.accessibility {
+   font-family: 'opendyslexic';
 }
-
-/* Reload FontAwesome for icons */
-.accessibility [class^="icon-"],[class*=" icon-"] {
-	font-family: FontAwesome;
- }
 
 /* Use an off-white background. Some users need high
    contrast for better reading. Some need low contrast. 
@@ -63,14 +74,14 @@
    with a script that results in symbols being colored 
    differently. This helps comprehension by making them
    subtly more visable.                                 */
-/*.accessibility h1, 
+.accessibility h1, 
 .accessibility h2, 
 .accessibility h3, 
 .accessibility h4, 
 .accessibility .highlight {
 	font-style: bold;
-	color: black;
-}*/
+	/*color: black;*/
+}
 .accessibility .highlight {
 	font-size: 125%;
 }
@@ -81,7 +92,12 @@
    helps.                                       */
 .accessibility p:nth-child(even),
 .accessibility li:nth-child(even) {
-	background-color: rgba(0,0,0, 0.03);
+	/*background-color: rgba(0,0,0, 0.03);*/
+    background: rgba(0, 0, 0, 0.03);
+    /* For IE 5.5 - 7*/
+    /*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#00000000);*/
+    /* For IE 8*/
+    /*-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#00000000, endColorstr=#00000000)";*/
 }
 
 
@@ -93,14 +109,16 @@
 
 }*/
 
-.accessibility .accessibility-ruler {
+.accessibility .ruler {
 	height: 1.5em;
-	background-color: rgba(0,0,0,.1);
+	background: #000;
+	opacity:0.1;
 	width: 100%;
-	position: absolute;
+	position: fixed;
 	top:-100px;
+	left:0;
 	z-index: 0;
 	
-	/* allow click through*/
+	/* allow click through */
 	pointer-events:none;
 }

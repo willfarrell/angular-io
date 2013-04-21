@@ -1,13 +1,12 @@
 angular.module('io.filters')
-// phone number {{ value | phone }}
 .filter('pad', function() {
-	return function(string, length, padding, append) {
+	return function(string, length, pad_char, append) {
 		string = string.toString();
-		length = length || 1;
-		padding = padding || ' ';
+		length = parseInt(length, 10) || 1;
+		pad_char = pad_char || ' ';
 		
 		while (string.length < length) {
-			string = append ? string+padding : padding+string;
+			string = append ? string+pad_char : pad_char+string;
 		}
 		return string;
 	};

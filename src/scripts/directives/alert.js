@@ -5,7 +5,7 @@ angular.module('io.directives')
 
 	return {
 		restrict: 'A',
-		link: function postLink(scope, element, attrs) {
+		link: function (scope, element, attrs) {
 			
 			function closeAlert(e) {
 				e.preventDefault();
@@ -28,7 +28,7 @@ angular.module('io.directives')
 angular.module('io.directives')
 .directive('dismiss', [function() {
 
-	return function postLink(scope, element, attrs) {
+	return function (scope, element, attrs) {
 			
 		function closeAlert(e) {
 			e.preventDefault();
