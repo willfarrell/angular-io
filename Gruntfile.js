@@ -11,8 +11,46 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		yeoman: yeomanConfig,
 		pkg: grunt.file.readJSON('package.json'),
+		bowerrc: grunt.file.readJSON('.bowerrc'),
 		jshintrc: grunt.file.readJSON('.jshintrc'),
 		
+		// setup
+		less: {
+			setup: {
+				options: {
+					paths: ['<%= bowerrc.directory %>/bootstrap/less/']
+				},
+				files: {
+					'<%= yeoman.app %>/styles/bootstrap.css': '<%= bowerrc.directory %>/bootstrap/less/bootstrap.less'
+				}
+			}
+		},
+		copy: {
+			setup: {
+				files: [
+					// testing libs
+					{
+						src: '<%= bowerrc.directory %>/angular/angular.js',
+						dest: 'test/lib/angular.js'
+					},
+					{
+						src: '<%= bowerrc.directory %>/angular-mocks/angular-mocks.js',
+						dest: 'test/lib/angular-mocks.js'
+					},
+					
+					// component files
+					{
+						expand: true,
+						flatten: true,
+						src: '<%= bowerrc.directory %>/open-dyslexic/**/*.{otf,eot,woff,ttf,svg}',
+						dest: '<%= yeoman.app %>/font/'
+					}
+					
+				]
+			}
+		},
+		
+		// testing
 		karma: {
 			options: {
 				configFile: 'test/karma.conf.js',
@@ -42,7 +80,8 @@ module.exports = function(grunt) {
 				'Gruntfile.js',
 				'<%= yeoman.app %>/scripts/**/*.js',
 				'!<%= yeoman.app %>/scripts/lib/**/*.js',
-				'test/**/*.js', '!test/lib/**/*.js'
+				'test/**/*.js', '!test/lib/**/*.js',
+				'!**/_*'
 			]
 		}
 		
@@ -59,6 +98,11 @@ module.exports = function(grunt) {
 	// Test tasks.
 	grunt.registerTask('test', ['jshint', 'karma:test']);
 	grunt.registerTask('test-server', ['karma:server']);
+	
+	grunt.registerTask('setup', [
+		'less:setup',
+		'copy:setup'
+	]);
 	
 	grunt.registerTask('default', ['test']);
 };

@@ -40,6 +40,14 @@ $ npm install -g karma grunt-cli bower
 $ npm install && bower install
 ```
 
+### Setup Component Files
+
+Some components need to be compiled (ie Twitter Bootstrap) and moved into place (AngularJS, fonts).
+
+```bash
+$ grunt setup
+```
+
 ### Build Files & Run Tests
 
 Before you commit, always run `grunt` to build and test everything once.
@@ -48,10 +56,24 @@ Before you commit, always run `grunt` to build and test everything once.
 $ grunt
 ```
 
+
 ## Modules
 ### Directives
+- alert (no tests) (bootstrap replacement)
 - inputMask (requires: $filter('format'))
+- modal (no tests) (bootstrap replacement)
 - passwordCheck
+- selectSize (no tests)
+- **To Do** 
+ - signature
+ - tabs (bootstrap replacement)
+
+### Factories
+- fluid (no tests)
+- time
+- **To Do**
+ - function
+ - rest / localstorage
 
 ### Filters
 - colorHash
@@ -63,8 +85,15 @@ $ grunt
 - range
 - truncate
 
+### Modules
+- 404 (no tests)
+- accessibility (no tests)
+- **To Do**
+ - filepicker
+ - message
+
 ## Contribs
 [@willfarrell](http://willfarrell.ca)
 
 ## License
-Your choice of [Apache Public License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) / [MIT](http://opensource.org/licenses/MIT) / [GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.html).
+Pick your poison [Apache Public License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) / [MIT](http://opensource.org/licenses/MIT) / [GNU General Public License v2.0](http://www.gnu.org/licenses/gpl-2.0.html).

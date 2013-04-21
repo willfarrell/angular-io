@@ -1,10 +1,12 @@
-# Folders #
-_notes/*
+# Dev rules #
 _*
-src/components/*
+
+# Setup Files #
 node_modules/*
-.tmp/*
-dist/*
+src/components/*
+src/font/*
+src/styles/bootstrap.css
+test/lib/*
 
 # Compiled source #
 ###################

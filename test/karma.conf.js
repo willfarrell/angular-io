@@ -15,11 +15,12 @@ var basePath = '..',
 files = [
   JASMINE, JASMINE_ADAPTER,
   'test/lib/angular.js',
-  'test/lib//angular-mocks.js',
+  'test/lib/**/*.js',
   
-  'src/scripts/app.sample.js',
+  'src/scripts/app.js',
   'src/scripts/lib/**/*.js',
   
+  //'src/scripts/**/*.js',
   'src/scripts/directives/*.js',
   'src/scripts/factories/*.js',
   'src/scripts/filters/*.js',
@@ -29,7 +30,7 @@ files = [
 
 // list of files to exclude
 exclude = [
-	'test/unit/todo/*.js'
+	'**/_*'
 ],
 
 // use dots reporter, as travis terminal does not support escaping sequences
