@@ -23,6 +23,8 @@ files = [
   //'src/scripts/**/*.js',
   'src/scripts/directives/*.js',
   'src/scripts/factories/*.js',
+  'src/scripts/filters/format.js',
+  'src/scripts/filters/pad.js',
   'src/scripts/filters/*.js',
   
   'test/unit/**/*.js'

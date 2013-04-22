@@ -37,6 +37,10 @@ module.exports = function(grunt) {
 						src: '<%= bowerrc.directory %>/angular-mocks/angular-mocks.js',
 						dest: 'test/lib/angular-mocks.js'
 					},
+					{
+						src: '<%= bowerrc.directory %>/marked/lib/marked.js',
+						dest: 'test/lib/marked.js'
+					},
 					
 					// component files
 					{
@@ -103,6 +107,7 @@ module.exports = function(grunt) {
 		'less:setup',
 		'copy:setup'
 	]);
+	grunt.registerTask('update', ['setup']);
 	
 	grunt.registerTask('default', ['test']);
 };

@@ -65,11 +65,8 @@
 	<p>Text , . </p>
 </div>
 
-
-<script src="components/angular/angular.js"></script>
-
 <script src="scripts/ie.js"></script>
-<script src="scripts/jquery.fb.js"></script>
+<script src="components/angular/angular.js"></script>
 
 <!-- !Liabraries -->
 <script src="components/marked/lib/marked.js"></script>
@@ -118,14 +115,9 @@ function AppCtrl($scope) {
 };
 </script>
 
-<!-- working on -->
-
-
 <!--<script src="scripts/app.rootScope.js"></script>-->
 <script src="scripts/modules/404.js"></script>
 <script src="scripts/modules/accessibility.js"></script>
-
-<!--<script src="scripts/factories/markdown.js"></script><!-- Requires components/marked/lib/marked.js -->
 
 <!-- !Angular.io Controllers -->
 <!--<script src="scripts/controllers/templateurl.js"></script>
@@ -159,14 +151,20 @@ function AppCtrl($scope) {
 
 <script src="scripts/factories/fluid.js"></script>
 <script src="scripts/factories/function.js"></script>
+<script src="scripts/lib.keyDB.js"></script>
+<script src="scripts/factories/localStorage.js"></script>
+<script src="scripts/factories/rest.js"></script>
 <script src="scripts/factories/time.js"></script>
 
-<script src="scripts/filters/colorHash.js"></script>
-<script src="scripts/filters/duration.js"></script>
 <script src="scripts/filters/format.js"></script>
-<script src="scripts/filters/markdown.js"></script>
-<script src="scripts/filters/ordinal.js"></script>
 <script src="scripts/filters/pad.js"></script>
+
+<script src="scripts/filters/colorHash.js"></script><!-- requires $filter('pad') -->
+<script src="scripts/filters/duration.js"></script>
+<script src="scripts/filters/markdown.js"></script><!-- requires components/marked/lib/marked.js -->
+<script src="scripts/filters/objectArray.js"></script>
+<script src="scripts/filters/ordinal.js"></script>
+<script src="scripts/filters/phone.js"></script><!-- requires $filter('format') -->
 <script src="scripts/filters/range.js"></script>
 <script src="scripts/filters/truncate.js"></script>
 

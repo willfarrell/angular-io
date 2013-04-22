@@ -62,23 +62,28 @@ $ grunt
 - inputMask (requires: $filter('format'))
 - passwordCheck
 - selectSize (no tests)
-- **To Do** 
- - signature
+- signature (no tests)
+- **To Do**
+ - formChange
 
 ### Factories
 - fluid (no tests)
+- rest (no tests)
+- localstorage (no tests)
 - time
 - **To Do**
- - function
- - rest / localstorage
+ - function (to delete)
+ 
 
 ### Filters
 - colorHash
 - duration
 - format
 - markdown
+- objectArray
 - ordinal
 - pad
+- phone
 - range
 - truncate
 
@@ -86,14 +91,19 @@ $ grunt
 - alert (no tests)
 - modal (no tests)
 - **To Do** 
- - tabs
+ - tab
+ - tooltip
+ - popover
+
 
 ### Modules
 - 404 (no tests)
 - accessibility (no tests)
 - **To Do**
- - filepicker
- - message
+ - htmlEntities (IE8 bug)
+ - filepicker (requires backend)
+ - follow (requires backend)
+ - message (requires backend)
 
 ## Contribs
 [@willfarrell](http://willfarrell.ca)

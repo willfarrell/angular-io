@@ -681,41 +681,6 @@ function(config, $rootScope, $timeout, $locale, $cookies, $http, $window, $locat
 	//!-- End Validation --//
 	//!-- JS Functions --//
 	// called from inside HTML templates
-	$rootScope.inArray = function(needle, haystack) {
-		if (!haystack) { return false; }
-		for (var i = 0, l = haystack.length; i < l; i++) {
-			if (haystack[i] === needle) { return true; }
-		}
-		return false;
-	};
-
-	$rootScope.objectIsEmpty = function(obj) {
-		for (var p in obj) {
-			if (obj.hasOwnProperty(p)) {
-				return false;
-			}
-		}
-		return true;
-	};
-
-	$rootScope.objectLength = function(obj) {
-		var c = 0;
-		for (var p in obj) {
-			if (obj.hasOwnProperty(p)) {
-				++c;
-			}
-		}
-		return c;
-	};
-
-	$rootScope.objectArray = function(obj) {
-		var arr = [];
-		for (var i in obj) {
-			if (obj.hasOwnProperty(i)) {
-				arr.push(obj[i]);
-			}
-		}
-		return arr;
-	};
+	
 	//!-- End JS Functions --//
 }]);

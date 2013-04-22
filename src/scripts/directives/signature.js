@@ -1,8 +1,9 @@
 /*
 To Do
-* add validity - use in forms
+- test validity - use in forms
+- add clear hook
 - add pen tip option
-- smoother pen stroke
+- smoother pen stroke - http://twistedoakstudios.com/blog/Post3138_mouse-path-smoothing-for-jack-lumber?utm_source=html5weekly&utm_medium=email
 - border option
 - other API features - http://thomasjbradley.ca/lab/signature-pad/
 */
@@ -84,6 +85,7 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 				previous.y = newY;
 				
 				controller.$modelValue = output;
+				controller.$setValidity('signature', true);
 			}
 		
 			
@@ -103,6 +105,9 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 				ctx.font = '15px sans-serif';	// set text font
 				ctx.textBaseline = 'bottom';	// set text position
 				ctx.fillText('x'+dash, padding, canvas.height - padding); // str, x, yield
+				
+				// set validity false
+				controller.$setValidity('signature', false);
 			}
 			
 			canvas.onmousedown = function(e) {
@@ -136,6 +141,7 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 				output = controller.$modelValue || [];
 				clear();
 				drawSignature(output, ctx);
+				controller.$setValidity('signature', (output.length));
 			};
 		}
 	};
