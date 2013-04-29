@@ -1,35 +1,35 @@
 {
-  "author": "will Farrell",
-  "name": "angular-io",
-  "version": "0.1.5",
-  "description": "AngularIO",
-  "keywords": [
-    "angularjs"
-  ],
-  "homepage": "http://github.com/willfarrell/angular-io",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/willfarrell/angular-io.git"
-  },
-  "dependencies": {},
-  "devDependencies": {
-  	"karma": "~0.8.0",
-    "bower": "~0.8.6",
-	"grunt": "~0.4.0",
+	"author": "will Farrell",
+	"name": "angular-io",
+	"version": "0.1.5",
+	"description": "AngularIO",
+	"keywords": [
+		"angularjs"
+	],
+	"homepage": "http://github.com/willfarrell/angular-io",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/willfarrell/angular-io.git"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"karma": "~0.8.0",
+		"bower": "~0.8.6",
+		"grunt": "~0.4.0",
 	
-	"grunt-contrib-less": "~0.5.0",
-	"grunt-contrib-copy": "~0.4.0",
+		"grunt-contrib-less": "~0.5.0",
+		"grunt-contrib-copy": "~0.4.0",
 	
-	"grunt-karma": "~0.4.3",
-	"grunt-contrib-jshint": "~0.1.1",
+		"grunt-karma": "~0.4.3",
+		"grunt-contrib-jshint": "~0.1.1",
 	
-    "matchdep": "~0.1.1"
-  },
-  "scripts": {
-    "test": "karma start test/karma.conf.js --single-run --browsers PhantomJS",
-    "test-server": "karma start test/karma.conf.js --browsers PhantomJS"
-  },
-  "engines": {
-    "node": ">=0.10.4"
-  }
+		"matchdep": "~0.1.1"
+	},
+	"scripts": {
+		"test": "karma start test/karma.conf.js --single-run --browsers PhantomJS",
+		"test-server": "karma start test/karma.conf.js --browsers PhantomJS"
+	},
+	"engines": {
+		"node": ">=0.10.4"
+	}
 }
