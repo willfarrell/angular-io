@@ -7,7 +7,7 @@ To Do
 */
 
 angular.module('io.factories')
-.factory('$offline', ['io.config', '$window', '$http', '$timeout', function(config, $window, $http, $timeout) {
+.factory('$offline', ['io.config', '$window', '$http', '$timeout', '$session', function(config, $window, $http, $timeout, $session) {
 	console.log('offlineFactory');
 	var $scope = {};
 	
@@ -105,11 +105,12 @@ angular.module('io.factories')
 	*/
 	
 	$window.addEventListener('online', function () {
+		
 		console.log('Event online');
 		if ($scope.state) {	// was offline
 			//$scope.alertOnline();
 			$timeout(function() {  // timeout is required to bypass some weird bug in angular **
-				$scope.checkSession(function(){
+				$session.check(function(){
 					$scope.run_request();
 				});
 			}, 0);
