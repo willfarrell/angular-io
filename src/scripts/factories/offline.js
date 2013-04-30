@@ -1,5 +1,3 @@
-/*globals db:true */
-
 /*
 To Do
 - watch login state, run que
@@ -7,18 +5,18 @@ To Do
 */
 
 angular.module('io.factories')
-.factory('$offline', ['io.config', '$window', '$http', '$timeout', '$session', function(config, $window, $http, $timeout, $session) {
+.factory('$offline', ['io.config', '$window', '$http', '$timeout', '$localStorage', '$session', function(config, $window, $http, $timeout, $localStorage, $session) {
 	console.log('offlineFactory');
 	var $scope = {};
 	
 	// vars
-	$scope.state = db.get('offline.state', !$window.navigator.onLine);
-	$scope.requests = db.get('offline.requests', []);
-	$scope.locading = false;
+	$scope.state = $localStorage.get('offline.state', !$window.navigator.onLine);
+	$scope.requests = $localStorage.get('offline.requests', []);
+	$scope.loading = false;
 	
 	$scope.store = function() {
-		$scope.state = db.set('offline.state', $scope.state);
-		$scope.request = db.set('offline.requests', $scope.requests);
+		$scope.state = $localStorage.set('offline.state', $scope.state);
+		$scope.request = $localStorage.set('offline.requests', $scope.requests);
 	};
 	
 	$scope.que_request = function(http_config, callback) {
