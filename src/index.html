@@ -29,7 +29,16 @@
         <span class="help-block error" data-ng-show="form.password.$error.number">Password needs at least one number</span>
         <span class="help-block error" data-ng-show="form.password.$error.special">Password needs at least one special character (!"£$%&...)</span>
         <span class="help-block error" data-ng-show="form.password.$error.identical">Password cannot have more than two identical characters</span>
-        <span class="help-block" data-ng-show="objectLength(form.password.$error) > 1">Our intern could crack that password, best to be safe and make it stronger.</span>
+        <span class="help-block" data-ng-show="objectLength(form.password.$error) > 2">Our intern could crack that password, best to be safe and make it stronger.</span>
+	</form>
+</div>
+
+<h3>Require Change</h3>
+<div class="well">
+	<form name="form">
+		<input type="text" data-ng-model="requirechange.name">
+		<input type="text" data-ng-model="requirechange.phone">
+		<div class="btn" data-require-change="{{requirechange}}" data-ng-disabled="form.$invalid">Save</div>
 	</form>
 </div>
 
@@ -123,6 +132,10 @@ function AppCtrl($scope) {
 		'- li\n'+
 		'***\n';
 	
+	$scope.requirechange = {
+		name: 'Will',
+		phone: '',
+	};
 	
 };
 </script>
@@ -157,6 +170,7 @@ function AppCtrl($scope) {
 <script src="scripts/directives/modal.js"></script>
 <script src="scripts/directives/navbar.js"></script>
 <script src="scripts/directives/passwordCheck.js"></script>
+<script src="scripts/directives/requireChange.js"></script>
 <script src="scripts/directives/selectSize.js"></script>
 <script src="scripts/directives/signature.js"></script>
 <script src="scripts/directives/tabs.js"></script>

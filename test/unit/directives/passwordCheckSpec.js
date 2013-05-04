@@ -26,7 +26,7 @@ describe('passwordCheck', function() {
     
   }));
   
-  it('should multiple error params', function() {
+  it('should have multiple error params', function() {
     changeValue('');
     expect(scope.form.input.$error.minlength).toEqual(false);
     expect(scope.form.input.$error.number).toEqual(false);
@@ -95,6 +95,13 @@ describe('passwordCheck', function() {
     expect(scope.form.input.$error.sameas).toEqual(false);
     changeValue('sameas');
     expect(scope.form.input.$error.sameas).toEqual(true);
+  });
+  
+  it('should pass', function() {
+    changeValue('Spain12345');
+    expect(scope.form.input.$valid).toEqual(true);
+    changeValue('_gotMilk85');
+    expect(scope.form.input.$valid).toEqual(true);
   });
   
 });
