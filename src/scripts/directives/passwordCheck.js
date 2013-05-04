@@ -11,23 +11,29 @@ angular.module('io.directives')
 		restrict: 'A',
 		require: 'ngModel',
 		link: function(scope, element, attrs, controller) {
+			//console.log(JSON.stringify(config));
 			
 			// init
-			controller.$error.minlength = false;
-			controller.$error.identical = false;
-			controller.$error.lower = false;
-			controller.$error.upper = false;
-			controller.$error.number = false;
-			controller.$error.special = false;
-			controller.$error.other = false;
-			controller.$error.subset = false;
-			controller.$error.sameas = false;
+			function init() {
+				controller.$error.minlength = false;
+				controller.$error.identical = false;
+				controller.$error.lower = false;
+				controller.$error.upper = false;
+				controller.$error.number = false;
+				controller.$error.special = false;
+				controller.$error.other = false;
+				controller.$error.subset = false;
+				controller.$error.sameas = false;
+			}
+			init();
 			
 			function check(e) {
+				
+				init();
 				var value = controller.$viewValue;
 				if (!value) { return; }
 				
-				controller.$error.identical = /(.){3}/.test(value);
+				controller.$error.identical = /(.)\1{2,}/.test(value);
 				
 				// [has,count]
 				var params = {
@@ -45,27 +51,25 @@ angular.module('io.directives')
 					else if ('~!@#$%^&*()_+{}|:\'<>? `-=[];",./'.indexOf(value.charAt(i)) > -1) { params.special[0] = 1; ++params.special[1]; }
 					else { params.other[0] = 1; ++params.other[1]; }
 				}
-				
+				// console.log(JSON.stringify(params));
 				controller.$error.minlength = (l < config.min_length);
 				
-				// must have n/4 params at min
-				var subset = (params.lower[0]+params.upper[0]+params.number[0]+params.special[0]+params.other[0] < config.min_subset);
-				controller.$error.subset = subset;
+				// must have n/5 params at min
+				controller.$error.subset = (params.lower[0]+params.upper[0]+params.number[0]+params.special[0]+params.other[0] < config.min_subset);
+
 				//if (params.lower[0]+params.upper[0]+params.number[0]+params.special[0]+params.other[0] < config.min_subset) {
-					controller.$error.upper = subset && (params.upper[1] < config.min_upper);
-					controller.$error.lower = subset && (params.lower[1] < config.min_lower);
-					controller.$error.number = subset && (params.number[1] < config.min_number);
-					controller.$error.special = subset && (params.special[1] < config.min_special);
-					controller.$error.other = subset && (params.other[1] < config.min_other);
+				controller.$error.upper = controller.$error.subset && (params.upper[1] < config.min_upper);
+				controller.$error.lower = controller.$error.subset && (params.lower[1] < config.min_lower);
+				controller.$error.number = controller.$error.subset && (params.number[1] < config.min_number);
+				controller.$error.special = controller.$error.subset && (params.special[1] < config.min_special);
+				controller.$error.other = controller.$error.subset && (params.other[1] < config.min_other);
 				//}
 				
 				controller.$error.sameas = (value === attrs.sameas);
 				
-				//},0);
-				
 			}
 			
-			element.bind('keyup', check);
+			element.bind('keyup', function() { $timeout(check,0); });
 			
 			controller.$render = check;
 		}

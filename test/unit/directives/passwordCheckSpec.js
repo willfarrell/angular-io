@@ -1,31 +1,33 @@
 /*globals describe:true, beforeEach:true, inject:true, it:true, expect:true */
 
 describe('passwordCheck', function() {
-  var $compile, $rootScope,
+  var $compile, $rootScope, $timeout,
       html, element, scope, changeValue;
   
   beforeEach(module('io.filters'));
   beforeEach(module('io.directives'));
-  beforeEach(inject(function($rootScope, $compile) {
+  beforeEach(inject(function($rootScope, $compile, $timeout) {
     // setup
-    html = '<form name="form"><input type="text" name="input" data-ng-model="inputValue" data-sameas="sameas" data-password-check required></form>';
+    html = '<form name="form"><input type="text" name="input" data-ng-model="inputValue" data-sameas="sameas" data-password-check></form>';
     element = angular.element(html);
     scope = $rootScope;
     element = $compile(element)(scope);
     scope.$digest();
+    
+    //wait = function(){ $timeout(function(){},0); };
     
     // change model
     changeValue = function(val) {
       scope.$apply(function() {
         scope.inputValue = val;
       });
-      //scope.$digest();
+      scope.$digest();
     };
+    
   }));
   
   it('should multiple error params', function() {
     changeValue('');
-    expect(scope.form.input.$error.required).toEqual(true);
     expect(scope.form.input.$error.minlength).toEqual(false);
     expect(scope.form.input.$error.number).toEqual(false);
     expect(scope.form.input.$error.lower).toEqual(false);
@@ -33,18 +35,6 @@ describe('passwordCheck', function() {
     expect(scope.form.input.$error.special).toEqual(false);
     expect(scope.form.input.$error.other).toEqual(false);
     expect(scope.form.input.$error.subset).toEqual(false);
-    expect(scope.form.input.$error.identical).toEqual(false);
-    expect(scope.form.input.$error.sameas).toEqual(false);
-    
-    changeValue('¥');
-    expect(scope.form.input.$error.required).toEqual(false);
-    expect(scope.form.input.$error.minlength).toEqual(true);
-    expect(scope.form.input.$error.number).toEqual(true);
-    expect(scope.form.input.$error.lower).toEqual(true);
-    expect(scope.form.input.$error.upper).toEqual(true);
-    expect(scope.form.input.$error.special).toEqual(true);
-    expect(scope.form.input.$error.other).toEqual(false);
-    expect(scope.form.input.$error.subset).toEqual(true);
     expect(scope.form.input.$error.identical).toEqual(false);
     expect(scope.form.input.$error.sameas).toEqual(false);
   });
@@ -57,39 +47,53 @@ describe('passwordCheck', function() {
   });
   
   it('should have number', function() {
+    changeValue('a');
+    expect(scope.form.input.$error.number).toEqual(true);
     changeValue('1');
     expect(scope.form.input.$error.number).toEqual(false);
   });
   
   it('should have upper', function() {
+    changeValue('1');
+    expect(scope.form.input.$error.upper).toEqual(true);
     changeValue('Q');
     expect(scope.form.input.$error.upper).toEqual(false);
   });
   
   it('should have lower', function() {
+    changeValue('1');
+    expect(scope.form.input.$error.lower).toEqual(true);
     changeValue('q');
     expect(scope.form.input.$error.lower).toEqual(false);
   });
   
   it('should have special', function() {
+    changeValue('a');
+    expect(scope.form.input.$error.special).toEqual(true);
     changeValue('~');
     expect(scope.form.input.$error.special).toEqual(false);
   });
   
   it('should have other', function() {
+    changeValue('a');
+    expect(scope.form.input.$error.other).toEqual(true);
     changeValue('¥');
-    //console.log(form.$error);
     expect(scope.form.input.$error.other).toEqual(false);
   });
   
   it('should have identical', function() {
+    changeValue('1');
+    expect(scope.form.input.$error.identical).toEqual(false);
+    changeValue('acb');
+    expect(scope.form.input.$error.identical).toEqual(false);
     changeValue('111');
     expect(scope.form.input.$error.identical).toEqual(true);
   });
   
   it('should have sameas', function() {
+    changeValue('1');
+    expect(scope.form.input.$error.sameas).toEqual(false);
     changeValue('sameas');
-    //console.log(form.$error);
     expect(scope.form.input.$error.sameas).toEqual(true);
   });
   
