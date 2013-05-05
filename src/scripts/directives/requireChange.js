@@ -13,16 +13,33 @@ angular.module('io.directives')
 			console.log(attrs);
 			console.log(controller);
 			*/
+			function prepare(value) {
+				// sort and remove blank elems
+				var json = JSON.parse(value),
+					json_sort = {},
+					keys = Object.keys(json);
+				
+				keys.sort();
+				
+				for (var i = 0, l = keys.length; i < l; i++) {
+					if (json[keys[i]] !== '') {
+						json_sort[keys[i]] = json[keys[i]];
+					}
+				}
+				
+				return JSON.stringify(json_sort);
+			}
 			
 			function check(value) {
-				//console.log(original,value);
+				//console.log('requireChange(', original, value, ')');
+				if (value) { value = prepare(value); }
 				// initial set
-				if (!original) {
+				if (!original && value) {
 					original = value;
 				}
-				//console.log(original,value);
 				
 				// check
+				//console.log(original, '==', value);
 				if (original === value) {
 					//console.log('disable');
 					scope.form.$invalid = true;
