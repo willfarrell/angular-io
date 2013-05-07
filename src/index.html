@@ -34,11 +34,16 @@
 </div>
 
 <h3>Require Change</h3>
-<div class="well">
+<div class="well" data-ng-controller="AppCtrl">
 	<form name="form">
 		<input type="text" data-ng-model="requirechange.name">
-		<input type="text" data-ng-model="requirechange.phone">
 		<div class="btn" data-require-change="{{requirechange}}" data-ng-disabled="form.$invalid">Save</div>
+	</form>
+</div>
+<div class="well" data-ng-controller="AppCtrl">
+	<form name="form">
+		<input type="text" data-ng-model="requirechange2.name">
+		<div class="btn" data-require-change="{{requirechange2}}" data-ng-disabled="form.$invalid">Save</div>
 	</form>
 </div>
 
@@ -97,7 +102,7 @@
 <script>
 angular.module('app', ['io']);
 
-function AppCtrl($scope) {
+function AppCtrl($scope, $timeout) {
 	var now = +new Date();
 	$scope.filter = {};
 	$scope.filter.colorHash = {custom:'', list:['colorHash', 'to do', 'friends', 'to read']};
@@ -133,10 +138,16 @@ function AppCtrl($scope) {
 		'***\n';
 	
 	$scope.requirechange = {
-		name: 'Will',
-		phone: '',
+		name: 'Change Me',
 	};
 	
+	$scope.requirechange2 = {};
+	
+	$timeout(function(){
+		$scope.requirechange2 = {
+			name: 'Change Me',
+		};
+	}, 1000)
 };
 </script>
 
@@ -163,21 +174,23 @@ function AppCtrl($scope) {
 <script src="scripts/modules/message.js"></script>
 <script src="scripts/modules/filepicker.js"></script>-->
 
+
+<script src="scripts/lib/keyDB.js"></script>
+
 <!-- !AngularIO -->
-<script src="scripts/directives/alert.js"></script>
-<script src="scripts/directives/htmlExtend.js"></script>
+<script src="scripts/bootstrap/alert.js"></script>
+<script src="scripts/bootstrap/modal.js"></script>
+<script src="scripts/bootstrap/tabs.js"></script>
+
+<!--<script src="scripts/directives/htmlExtend.js"></script>-->
 <script src="scripts/directives/inputMask.js"></script>
-<script src="scripts/directives/modal.js"></script>
-<script src="scripts/directives/navbar.js"></script>
+<!--<script src="scripts/directives/navbar.js"></script>--><!-- replace by angular-strap -->
 <script src="scripts/directives/passwordCheck.js"></script>
 <script src="scripts/directives/requireChange.js"></script>
 <script src="scripts/directives/selectSize.js"></script>
 <script src="scripts/directives/signature.js"></script>
-<script src="scripts/directives/tabs.js"></script>
 
 <script src="scripts/factories/fluid.js"></script>
-<script src="scripts/factories/function.js"></script>
-<script src="scripts/lib.keyDB.js"></script>
 <script src="scripts/factories/localStorage.js"></script>
 <script src="scripts/factories/rest.js"></script>
 <script src="scripts/factories/time.js"></script>

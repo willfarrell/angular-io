@@ -34,18 +34,26 @@ angular.module('io.directives')
 				//console.log('requireChange(', original, value, ')');
 				if (value) { value = prepare(value); }
 				// initial set
-				if (!original && value) {
+				if (!original && value !== '{}') {
 					original = value;
 				}
 				
 				// check
 				//console.log(original, '==', value);
-				if (original === value) {
-					//console.log('disable');
+				//$timeout(function(){
+					if (original === value) {
+						console.log('disable');
+						scope.form.$invalid = true;
+					} else if (scope.form.$valid === true) {
+						scope.form.$invalid = false;
+					}
+				//},0);
+				/*if (original === value) {
+					console.log('disable');
 					scope.form.$invalid = true;
 				} else if (scope.form.$valid === true) {
 					scope.form.$invalid = false;
-				}
+				}*/
 			}
 			
 			attrs.$observe('requireChange', check);
