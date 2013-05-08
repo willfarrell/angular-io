@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Angular-io : AngularIO - Collection of AngularJS modules worth checking out." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Angular-io</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/willfarrell/angular-io">View on GitHub</a>
+
+          <h1 id="project_title">Angular-io</h1>
+          <h2 id="project_tagline">AngularIO - Collection of AngularJS modules worth checking out.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/willfarrell/angular-io/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/willfarrell/angular-io/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Angular.io <a href="https://travis-ci.org/willfarrell/angular-io"><img src="https://travis-ci.org/willfarrell/angular-io.png?branch=master" alt="Build Status"></a>
+</h1>
+
+<hr><h2>Usage</h2>
+
+<p>This is a subset of <a href="https://github.com/willfarrell/angular-io-app">angular-io-app</a>.</p>
+
+<h3>Requirements</h3>
+
+<ul>
+<li>
+<strong>AngularJS v1.0.0+</strong> is currently required.</li>
+</ul><h2>Installation</h2>
+
+<p>Include <code>io</code> in your app dependencies, and you're good to go.</p>
+
+<div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'app'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'io'</span><span class="p">]);</span>
+</pre></div>
+
+<p>The modules can be found in the <a href="https://github.com/willfarrell/angular-io/tree/master/src/scripts/directives">Directives</a> and <a href="https://github.com/willfarrell/angular-io/tree/master/src/scripts/filters">Filters</a> folders.</p>
+
+<h2>Development</h2>
+
+<p>You do not need to build the project to use it - see above - but if you are working on it then this is what you need to know.</p>
+
+<h3>Requirements</h3>
+
+<ol>
+<li><p>Install <a href="http://nodejs.org/">Node.js</a> and NPM (should come with)</p></li>
+<li><p>Install global dependencies <code>grunt</code>, <code>bower</code>, and <code>karma</code>:</p></li>
+</ol><div class="highlight"><pre><span class="nv">$ </span>npm install -g karma grunt-cli bower
+</pre></div>
+
+<ol>
+<li>Install local dependencies:</li>
+</ol><div class="highlight"><pre><span class="nv">$ </span>npm install <span class="o">&amp;&amp;</span> bower install
+</pre></div>
+
+<h3>Setup Component Files</h3>
+
+<p>Some components need to be compiled (Twitter Bootstrap) and moved into place (AngularJS, fonts).</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>grunt setup
+</pre></div>
+
+<h3>Build Files &amp; Run Tests</h3>
+
+<p>Before you commit, always run <code>grunt</code> to build and test everything once.</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>grunt
+</pre></div>
+
+<h2>Modules</h2>
+
+<h3>Directives</h3>
+
+<ul>
+<li>inputMask (requires: $filter('format'))</li>
+<li>passwordCheck</li>
+<li>selectSize (no tests)</li>
+<li>signature (no tests)</li>
+<li>
+<strong>To Do</strong>
+
+<ul>
+<li>formChange</li>
+</ul>
+</li>
+</ul><h3>Factories</h3>
+
+<ul>
+<li>fluid (no tests)</li>
+<li>rest (no tests)</li>
+<li>localstorage (no tests)</li>
+<li>time</li>
+<li>
+<strong>To Do</strong>
+
+<ul>
+<li>function (to delete)</li>
+</ul>
+</li>
+</ul><h3>Filters</h3>
+
+<ul>
+<li>colorHash</li>
+<li>duration</li>
+<li>format</li>
+<li>markdown</li>
+<li>objectArray</li>
+<li>ordinal</li>
+<li>pad</li>
+<li>phone</li>
+<li>range</li>
+<li>truncate</li>
+</ul><h3>Bootstrap</h3>
+
+<ul>
+<li>alert (no tests)</li>
+<li>modal (no tests)</li>
+<li>
+<strong>To Do</strong> 
+
+<ul>
+<li>tab</li>
+<li>tooltip</li>
+<li>popover</li>
+</ul>
+</li>
+</ul><h3>Modules</h3>
+
+<ul>
+<li>404 (no tests)</li>
+<li>accessibility (no tests)</li>
+<li>
+<strong>To Do</strong>
+
+<ul>
+<li>htmlEntities (IE8 bug)</li>
+<li>filepicker (requires backend)</li>
+<li>follow (requires backend)</li>
+<li>message (requires backend)</li>
+</ul>
+</li>
+</ul><h2>Contribs</h2>
+
+<p><a href="http://willfarrell.ca">@willfarrell</a></p>
+
+<h2>License</h2>
+
+<p>Pick your poison <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Public License 2.0</a> / <a href="http://opensource.org/licenses/MIT">MIT</a> / <a href="http://www.gnu.org/licenses/gpl-2.0.html">GNU General Public License v2.0</a>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Angular-io maintained by <a href="https://github.com/willfarrell">willfarrell</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
