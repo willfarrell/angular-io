@@ -11,7 +11,7 @@ angular.module('io.factories')
 	var $scope = {};
 	
 	$scope.get = function(id, default_obj, callback) {
-		if (config[id] && config[id].substr(-4) === 'json') {
+		if (config[id] && typeof(config[id]) === 'string' && config[id].substr(-4) === 'json') {
 			$http.get(config[id])
 				.success(function(data, status){
 					config[id] = data;
