@@ -1,3 +1,9 @@
 {
-    "directory": "src/components"
+  "directory": "src/components",
+  "endpoint": "https://bower.mycompany.com",
+  "json": "bower.json",
+  "searchpath": [
+    "https://bower.herokuapp.com"
+  ],
+  "shorthand_resolver": "git://github.com/willfarrell/angular-io.git"
 }
