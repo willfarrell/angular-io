@@ -1,0 +1,21 @@
+<h2>Filters</h2>
+<div class="well" data-ng-controller="FilterCtrl">
+	<div class="row">
+		<div class="span5">
+			<input type="text" placeholder="colorHash" data-ng-model="filter.colorHash.custom">
+			<div class="label" data-ng-style="{backgroundColor:'#'+(filter.colorHash.custom | colorHash)}">#{{filter.colorHash.custom | colorHash}}</div>
+			<pre>{ { string | colorHash } }</pre>
+		</div>
+		<div class="span5">
+			<div class="label" data-ng-repeat="item in filter.colorHash.list" data-ng-style="{backgroundColor:'#'+(item | colorHash)}">{{item}} -> #{{item | colorHash}}</div>
+		</div>
+	</div>
+</div>
+
+<div class="well" data-ng-controller="FilterCtrl">
+	<input type="text" placeholder="duration" data-ng-model="filter.duration.custom">
+	{{filter.duration.custom | duration}}
+	<ul>
+		<li data-ng-repeat="item in filter.duration.list">{{item}} -> {{item | duration}}</li>
+	</ul>
+</div>

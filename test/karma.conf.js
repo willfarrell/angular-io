@@ -1,5 +1,6 @@
 /*globals
 LOG_DISABLE:true, LOG_ERROR:true, LOG_WARN:true, LOG_INFO:true, LOG_DEBUG:true,
+ANGULAR_SCENARIO:true, ANGULAR_SCENARIO_ADAPTER:true,
 JASMINE:true, JASMINE_ADAPTER:true,
 */
 
@@ -8,11 +9,13 @@ JASMINE:true, JASMINE_ADAPTER:true,
 
 // base path, that will be used to resolve files and exclude
 var basePath = '..',
+	urlRoot = '/src/',
 
 //frameworks = ['jasmine'];
 
 // list of files / patterns to load in the browser
 files = [
+  ANGULAR_SCENARIO, ANGULAR_SCENARIO_ADAPTER,
   JASMINE, JASMINE_ADAPTER,
   'test/lib/angular.js',
   'test/lib/**/*.js',
@@ -20,6 +23,8 @@ files = [
   'src/scripts/app.js',
   'src/scripts/lib/**/*.js',
   
+  
+  'src/scripts/factories/config.js',
   //'src/scripts/**/*.js',
   'src/scripts/directives/*.js',
   'src/scripts/factories/*.js',
@@ -79,6 +84,8 @@ browsers = ['PhantomJS'],
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
 singleRun = false,
+
+//proxies = { '/': 'http://angulario:8888/' },
 
 // report which specs are slower than 500ms
 // CLI --report-slower-than 500

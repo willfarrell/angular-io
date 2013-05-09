@@ -1,106 +1,52 @@
 <!DOCTYPE html>
 <html data-ng-app="app">
 <head>
-  	<meta http-equiv="Content-Type" 	content="text/html; charset=UTF-8">
-    <meta name="robots" 				content="index, follow"><!-- index, noindex, follow, nofollow -->
-  	
-  	<title></title>
-    <meta name="description" 	content="{{i18n.meta_description}}">
-    <meta name="author" 		content="humans.txt">
+	<meta http-equiv="Content-Type" 	content="text/html; charset=UTF-8">
+	<meta name="robots" 				content="index, follow"><!-- index, noindex, follow, nofollow -->
+	
+	<title></title>
+	<meta name="description" 	content="{{i18n.meta_description}}">
+	<meta name="author" 		content="humans.txt">
 
-    <!-- build:css css/app.min.css -->
-    <link rel="stylesheet" href="styles/bootstrap.css"><!-- compile after bower -->
-    <link rel="stylesheet" href="styles/accessibility.css">
-    <!-- endbuild -->
+	<!-- build:css css/app.min.css -->
+	<link rel="stylesheet" href="styles/bootstrap.css"><!-- compile after bower -->
+	<link rel="stylesheet" href="styles/accessibility.css">
+	<!-- endbuild -->
 
 </head>
 <body class="container" data-ng-controller="AppCtrl">
 
 <div data-ng-view></div>
 
-<h2>Directives</h2>
-<h3>Password Check</h3>
-<div class="well">
-	<form name="form">
-		<input type="text" name="password" data-ng-model="inputValue" data-sameas="sameas" data-password-check required>
-		<span class="help-block error" data-ng-show="form.password.$error.minlength">Password too short, must be {{settings.password.min_length}} or more</span>
-        <span class="help-block error" data-ng-show="form.password.$error.lower">Password needs at least one lower case letter</span>
-        <span class="help-block error" data-ng-show="form.password.$error.upper">Password needs at least one upper case letter</span>
-        <span class="help-block error" data-ng-show="form.password.$error.number">Password needs at least one number</span>
-        <span class="help-block error" data-ng-show="form.password.$error.special">Password needs at least one special character (!"£$%&...)</span>
-        <span class="help-block error" data-ng-show="form.password.$error.identical">Password cannot have more than two identical characters</span>
-        <span class="help-block" data-ng-show="objectLength(form.password.$error) > 2">Our intern could crack that password, best to be safe and make it stronger.</span>
-	</form>
-</div>
-
-<h3>Require Change</h3>
-<div class="well" data-ng-controller="AppCtrl">
-	<form name="form">
-		<input type="text" data-ng-model="requirechange.name">
-		<div class="btn" data-require-change="{{requirechange}}" data-ng-disabled="form.$invalid">Save</div>
-	</form>
-</div>
-<div class="well" data-ng-controller="AppCtrl">
-	<form name="form">
-		<input type="text" data-ng-model="requirechange2.name">
-		<div class="btn" data-require-change="{{requirechange2}}" data-ng-disabled="form.$invalid">Save</div>
-	</form>
-</div>
-
-<h3>markdown</h3>
-<div class="well">
-	<div class="row">
-		<div class="span5"><textarea data-ng-model="markdown" rows="7"></textarea></div>
-		<div class="span5" data-ng-bind-html-unsafe="(markdown | markdown)"></div>
-	</div>
-</div>
-
-<h3>signature</h3>
-<div class="well">
-	<div data-signature data-ng-model="signature" data-width="300" data-height="200"></div>
-</div>
 
 
-<h2>Filters</h2>
-<div class="well">
-	<div class="row">
-		<div class="span5">
-			<input type="text" placeholder="colorHash" data-ng-model="filter.colorHash.custom">
-			<div class="label" data-ng-style="{backgroundColor:'#'+(filter.colorHash.custom | colorHash)}">#{{filter.colorHash.custom | colorHash}}</div>
-			<pre>{ { string | colorHash } }</pre>
-		</div>
-		<div class="span5">
-			<div class="label" data-ng-repeat="item in filter.colorHash.list" data-ng-style="{backgroundColor:'#'+(item | colorHash)}">{{item}} -> #{{item | colorHash}}</div>
-		</div>
-	</div>
-</div>
-
-<div class="well">
-	<input type="text" placeholder="duration" data-ng-model="filter.duration.custom">
-	{{filter.duration.custom | duration}}
-	<ul>
-		<li data-ng-repeat="item in filter.duration.list">{{item}} -> {{item | duration}}</li>
-	</ul>
-</div>
-
-<h2>Modules</h2>
-<h3>accessibility</h3>
-<div class="well accessibility">
-	<p>Text , . </p>
-	<p>Text , . </p>
-	<p>Text , . </p>
-</div>
-
-<script src="scripts/ie.js"></script>
 <script src="components/angular/angular.js"></script>
 
 <!-- !Liabraries -->
 <script src="components/marked/lib/marked.js"></script>
+<script src="scripts/lib/keyDB.js"></script>
 
 <!-- !Angular.io -->
+<script src="scripts/ie.js"></script>
 <script src="scripts/app.js"></script>
 <script>
 angular.module('app', ['io']);
+
+angular.module('app')
+.config(['$routeProvider', function($routeProvider) {
+	var _view_ = 'views/'
+	$routeProvider
+		.when('/',	{templateUrl:_view_+'index.html'})
+		.when('/:page',					{
+			template:'<div data-ng-include src="templateUrl"></div>',
+			controller: 'TemplateUrlCtrl'
+		})
+		.when('/:folder/:page',			{
+			template:'<div data-ng-include src="templateUrl"></div>',
+			controller: 'TemplateUrlCtrl'
+		})
+		.otherwise({redirectTo:'/'});
+}]);
 
 function AppCtrl($scope, $timeout) {
 	var now = +new Date();
@@ -149,33 +95,40 @@ function AppCtrl($scope, $timeout) {
 		};
 	}, 1000)
 };
+
+function FilterCtrl($scope, $timeout) {
+	var now = +new Date();
+	$scope.colorHash = {custom:'', list:['colorHash', 'to do', 'friends', 'to read']};
+	$scope.duration = {custom:now, list:[
+		// past
+		(now - 7 * 86400 * 1000),
+		(now - 3 * 86400 * 1000),
+		(now - 1 * 86400 * 1000),
+		(now - 12 * 3600 * 1000),
+		(now - 1 * 3600 * 1000),
+		(now - 30 * 60 * 1000),
+		(now - 30 * 1000),
+		(now),
+		// future
+		(now + 30 * 1000),
+		(now + 30 * 60 * 1000),
+		(now + 1 * 3600 * 1000),
+		(now + 12 * 3600 * 1000),
+		(now + 1 * 86400 * 1000),
+		(now + 3 * 86400 * 1000),
+		(now + 7 * 86400 * 1000),
+	]};
+	$scope.format = 'test';
+};
+
+
+
 </script>
 
 <!--<script src="scripts/app.rootScope.js"></script>-->
 <script src="scripts/modules/404.js"></script>
 <script src="scripts/modules/accessibility.js"></script>
-
-<!-- !Angular.io Controllers -->
-<!--<script src="scripts/controllers/templateurl.js"></script>
-<script src="scripts/controllers/sign.js"></script>
-<script src="scripts/controllers/confirm.js"></script>
-<script src="scripts/controllers/reset.js"></script>
-<script src="scripts/controllers/password.js"></script>
-<script src="scripts/controllers/notifications.js"></script>
-<script src="scripts/controllers/onboard.js"></script>
-<script src="scripts/controllers/invite.js"></script>
-<script src="scripts/controllers/security.js"></script>
-<script src="scripts/controllers/user.js"></script>-->
-<!--<script src="scripts/controllers/company.js"></script>-->
-
-<!-- Angular.io Plugins -->
-<!--<script src="scripts/modules/contact.js"></script>
-<script src="scripts/modules/follow.js"></script>
-<script src="scripts/modules/message.js"></script>
-<script src="scripts/modules/filepicker.js"></script>-->
-
-
-<script src="scripts/lib/keyDB.js"></script>
+<script src="scripts/modules/templateurl.js"></script>
 
 <!-- !AngularIO -->
 <script src="scripts/bootstrap/alert.js"></script>
@@ -190,6 +143,7 @@ function AppCtrl($scope, $timeout) {
 <script src="scripts/directives/selectSize.js"></script>
 <script src="scripts/directives/signature.js"></script>
 
+<script src="scripts/factories/config.js"></script>
 <script src="scripts/factories/fluid.js"></script>
 <script src="scripts/factories/localStorage.js"></script>
 <script src="scripts/factories/rest.js"></script>

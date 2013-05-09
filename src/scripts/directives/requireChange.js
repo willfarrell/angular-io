@@ -42,7 +42,6 @@ angular.module('io.directives')
 				//console.log(original, '==', value);
 				//$timeout(function(){
 					if (original === value) {
-						console.log('disable');
 						scope.form.$invalid = true;
 					} else if (scope.form.$valid === true) {
 						scope.form.$invalid = false;

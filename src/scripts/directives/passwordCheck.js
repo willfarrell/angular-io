@@ -5,8 +5,22 @@ check $setValidity(validationErrorKey, isValid) - http://docs.angularjs.org/api/
 */
 
 angular.module('io.directives')
-.directive('passwordCheck', ['io.config', '$timeout', function(config_obj, $timeout) {
-	var config = config_obj.password;
+//.directive('passwordCheck', ['io.config', '$timeout', '$http', function(config_obj, $timeout, $http) {
+.directive('passwordCheck', ['$config', '$timeout', '$http', function($config, $timeout, $http) {
+	// Defaults to OWASP Specs
+	var config = {
+		'min_length'	:10,	// OWASP:10
+		'max_identical'	:3,		// OWASP:3
+		'min_subset'	:3,		// OWASP:3 How many of the below
+		'min_upper'		:1,		// ABCDEFGHIJKLMNOPQRSTUVWXYZ
+		'min_lower'		:1,		// abcdefghijklmnopqrstuvwxyz
+		'min_number'	:1,		// 0123456789
+		'min_special'	:1,		// ~!@#$%^&*()_+{}|:\'<>? `-=[];",./
+		'min_other'		:1		// any other char
+	};
+	
+	$config.get('password', config, function(value){ config = value; });
+	
 	return {
 		restrict: 'A',
 		require: 'ngModel',

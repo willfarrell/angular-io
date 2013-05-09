@@ -1,0 +1,41 @@
+<h2>Directives</h2>
+<h3>Password Check</h3>
+<div class="well">
+	<form name="form">
+		<input type="text" name="password" data-ng-model="inputValue" data-sameas="sameas" data-password-check required>
+		<span class="help-block error" data-ng-show="form.password.$error.minlength">Password too short, must be {{settings.password.min_length}} or more</span>
+        <span class="help-block error" data-ng-show="form.password.$error.lower">Password needs at least one lower case letter</span>
+        <span class="help-block error" data-ng-show="form.password.$error.upper">Password needs at least one upper case letter</span>
+        <span class="help-block error" data-ng-show="form.password.$error.number">Password needs at least one number</span>
+        <span class="help-block error" data-ng-show="form.password.$error.special">Password needs at least one special character (!"£$%&...)</span>
+        <span class="help-block error" data-ng-show="form.password.$error.identical">Password cannot have more than two identical characters</span>
+        <span class="help-block" data-ng-show="objectLength(form.password.$error) > 2">Our intern could crack that password, best to be safe and make it stronger.</span>
+	</form>
+</div>
+
+<h3>Require Change</h3>
+<div class="well" data-ng-controller="AppCtrl">
+	<form name="form">
+		<input type="text" data-ng-model="requirechange.name">
+		<div class="btn" data-require-change="{{requirechange}}" data-ng-disabled="form.$invalid">Save</div>
+	</form>
+</div>
+<div class="well" data-ng-controller="AppCtrl">
+	<form name="form">
+		<input type="text" data-ng-model="requirechange2.name">
+		<div class="btn" data-require-change="{{requirechange2}}" data-ng-disabled="form.$invalid">Save</div>
+	</form>
+</div>
+
+<h3>markdown</h3>
+<div class="well">
+	<div class="row">
+		<div class="span5"><textarea data-ng-model="markdown" rows="7"></textarea></div>
+		<div class="span5" data-ng-bind-html-unsafe="(markdown | markdown)"></div>
+	</div>
+</div>
+
+<h3>signature</h3>
+<div class="well">
+	<div data-signature data-ng-model="signature" data-width="300" data-height="200"></div>
+</div>

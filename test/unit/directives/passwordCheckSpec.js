@@ -1,4 +1,4 @@
-/*globals describe:true, beforeEach:true, inject:true, it:true, expect:true */
+/*globals describe:true, beforeEach:true, inject:true, it:true, expect:true, input:true */
 
 describe('passwordCheck', function() {
   var $compile, $rootScope, $timeout,
