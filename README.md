@@ -1,4 +1,4 @@
-# Angular.io [![Build Status](https://travis-ci.org/willfarrell/angular-io.png?branch=master)](https://travis-ci.org/willfarrell/angular-io)
+# Angular.io [![Build Status](https://travis-ci.org/willfarrell/angular-io.png?branch=master)](https://travis-ci.org/willfarrell/angular-io) <!-- [![npm Version](https://badge.fury.io/js/angular-io.png)](http://badge.fury.io/js/angular-io) --> [![Dependencies](https://david-dm.org/willfarrell/angular-io.png)](https://david-dm.org/willfarrell/angular-io) [![devDependency Status](https://david-dm.org/willfarrell/angular-io/dev-status.png)](https://david-dm.org/willfarrell/angular-io#info=devDependencies)
 
 ***
 
