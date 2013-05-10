@@ -9,26 +9,26 @@ LOG_DISABLE:true, LOG_ERROR:true, LOG_WARN:true, LOG_INFO:true, LOG_DEBUG:true
 var basePath = '..',
 	urlRoot = '/src/',
 
-frameworks = ['jasmine']; // 'requirejs' for ANGULAR_SCENARIO:true, ANGULAR_SCENARIO_ADAPTER:true,
+frameworks = ['jasmine'], // 'requirejs' for ANGULAR_SCENARIO:true, ANGULAR_SCENARIO_ADAPTER:true,
 
 // list of files / patterns to load in the browser
 files = [
-  'test/lib/angular.js',
-  'test/lib/**/*.js',
+	'test/lib/angular.js',
+	'test/lib/**/*.js',
 
-  'src/scripts/app.js',
-  'src/scripts/lib/**/*.js',
+	'src/scripts/app.js',
+	'src/scripts/lib/**/*.js',
 
 
-  'src/scripts/factories/config.js',
-  //'src/scripts/**/*.js',
-  'src/scripts/directives/*.js',
-  'src/scripts/factories/*.js',
-  'src/scripts/filters/format.js',
-  'src/scripts/filters/pad.js',
-  'src/scripts/filters/*.js',
+	'src/scripts/factories/config.js',
+	//'src/scripts/**/*.js',
+	'src/scripts/directives/*.js',
+	'src/scripts/factories/*.js',
+	'src/scripts/filters/format.js',
+	'src/scripts/filters/pad.js',
+	'src/scripts/filters/*.js',
 
-  'test/unit/**/*.js'
+	'test/unit/**/*.js'
 ],
 
 // list of files to exclude
@@ -42,8 +42,8 @@ exclude = [
 reporters = ['progress', 'junit'],
 
 junitReporter = {
-  // will be resolved to basePath (in the same way as files/exclude patterns)
-  outputFile: 'test-results.xml'
+	// will be resolved to basePath (in the same way as files/exclude patterns)
+	outputFile: 'test-results.xml'
 },
 
 // web server port
@@ -90,16 +90,16 @@ reportSlowerThan = 500,
 
 // compile coffee scripts
 preprocessors = {
-  //'**/*.coffee': 'coffee'
+	//'**/*.coffee': 'coffee'
 },
 
 plugins = [
-  'karma-jasmine',
-  'karma-chrome-launcher',
-  'karma-firefox-launcher',
-  //'karma-opera-launcher',
-  //'karma-safari-launcher',
-  'karma-phantomjs-launcher',
-  'karma-script-launcher',
-  'karma-junit-reporter'
+	'karma-jasmine',
+	'karma-chrome-launcher',
+	'karma-firefox-launcher',
+	//'karma-opera-launcher',
+	//'karma-safari-launcher',
+	'karma-phantomjs-launcher',
+	'karma-script-launcher',
+	'karma-junit-reporter'
 ];

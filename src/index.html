@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html data-ng-app="app">
 <head>
-	<meta http-equiv="Content-Type" 	content="text/html; charset=UTF-8">
-	<meta name="robots" 				content="index, follow"><!-- index, noindex, follow, nofollow -->
-	
+	<meta http-equiv="Content-Type"content="text/html; charset=UTF-8">
+	<meta name="robots"content="index, follow"><!-- index, noindex, follow, nofollow -->
+
 	<title></title>
-	<meta name="description" 	content="{{i18n.meta_description}}">
-	<meta name="author" 		content="humans.txt">
+	<meta name="description"content="{{i18n.meta_description}}">
+	<meta name="author"content="humans.txt">
 
 	<!-- build:css css/app.min.css -->
 	<link rel="stylesheet" href="styles/bootstrap.css"><!-- compile after bower -->
 	<link rel="stylesheet" href="styles/accessibility.css">
-	<link rel="stylesheet" href="styles/cookies.css">
 	<!-- endbuild -->
 
 </head>
@@ -29,7 +28,7 @@
 <script src="scripts/ie.js"></script>
 <script src="scripts/app.js"></script>
 <script>
-angular.module('app', ['io']);
+angular.module('app', ['io', 'ngCookies']);
 
 angular.module('app')
 .config(['$routeProvider', function($routeProvider) {
@@ -47,7 +46,7 @@ angular.module('app')
 		.otherwise({redirectTo:'/'});
 }]);
 
-function AppCtrl($scope, $timeout) {
+function AppCtrl($scope, $timeout, $cookies) {
 	var now = +new Date();
 	$scope.filter = {};
 	$scope.filter.colorHash = {custom:'', list:['colorHash', 'to do', 'friends', 'to read']};
@@ -71,7 +70,7 @@ function AppCtrl($scope, $timeout) {
 		(now + 7 * 86400 * 1000),
 	]};
 	$scope.filter.format = 'test';
-	
+
 	$scope.signature = [];
 	$scope.markdown = '# H1\n'+
 		'## H2\n'+
@@ -81,18 +80,24 @@ function AppCtrl($scope, $timeout) {
 		'\n'+
 		'- li\n'+
 		'***\n';
-	
+
 	$scope.requirechange = {
 		name: 'Change Me',
 	};
-	
+
 	$scope.requirechange2 = {};
-	
+
 	$timeout(function(){
 		$scope.requirechange2 = {
 			name: 'Change Me',
 		};
-	}, 1000)
+	}, 1000);
+
+	$scope.cookies = $cookies;
+	$cookies.test = '1';
+	$scope.cookies = $cookies;
+	$cookies.test2 = '2';
+	$scope.cookies = $cookies;
 };
 
 function FilterCtrl($scope, $timeout) {
@@ -143,6 +148,7 @@ function FilterCtrl($scope, $timeout) {
 <script src="scripts/directives/signature.js"></script>
 
 <script src="scripts/factories/config.js"></script>
+<script src="scripts/factories/angular-cookies.js"></script>
 <script src="scripts/factories/fluid.js"></script>
 <script src="scripts/factories/localStorage.js"></script>
 <script src="scripts/factories/rest.js"></script>

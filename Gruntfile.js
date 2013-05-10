@@ -77,11 +77,11 @@ module.exports = function(grunt) {
 			server: '.tmp'
 		},*/
 		replace: {
-			htmllint: {
+			whitespace: {
 				options: {
 					replacements: [
 						{	// Clean "Trailing whitespace"
-							pattern: /[ \t]+[\n\r]/g,
+							pattern: /[ \t]{1,}[\n\r]/g,
 							replacement: '\n'
 						},
 						{	// Clean "Mixed spaces and tabs" - All spaces
@@ -105,78 +105,15 @@ module.exports = function(grunt) {
 						cwd: '',
 						dest: '',
 						src: [
-							'<%= yeoman.app %>/*.html',
-							'<%= yeoman.app %>/view/*.html',
-							'<%= yeoman.app %>/view/**/*.html'
-						]
-					}
-				]
-			},
-			jslint: {
-				options: {
-					replacements: [
-						{	// Clean "Trailing whitespace"
-							pattern: /[ \t]+[\n\r]/g,
-							replacement: '\n'
-						},
-						{	// Clean "Mixed spaces and tabs" - All spaces
-							pattern: /[ ]{4}/g,
-							replacement: '\t'
-						},
-						{	// Clean "Mixed spaces and tabs" - Pre Mix
-							pattern: /[ ]{1,3}\t+/g,
-							replacement: ''
-						},
-						{	// Clean "Mixed spaces and tabs" - Post Mix
-							pattern: /\t+[ ]{1,3}/g,
-							replacement: '\t'
-						}/*,
-						{	// Clean "Extra comma" - Has trailing single-line comment check
-							pattern: /,(\s*(\/\/.*)[\n\r]\s*[\]\}]+)/g,
-							replacement: '$1' // requires "
-						}*/
-						// "A regular expression literal can be confused with '/='" - Use /\=
-					]
-				},
-				files: [
-					{
-						expand: true,
-						dot: true,
-						cwd: '',
-						dest: '',
-						src: [
+							'<%= yeoman.app %>/*.{css,js,html}',
+							'<%= yeoman.app %>/{scripts,styles,views}/*.{css,js,html}',
 							'*.js',
-							'test/**/*.js', '!test/lib/*.js',
-							'<%= yeoman.app %>/scripts/**/*.js'
+							'test/**/*.js', '!test/lib/*.js'
 						]
-					}
-				]
-			},
-			cssmin: {
-				options: {
-					replacements: [
-						// removes /*! ---- */ banner comments for max compression
-						{
-							pattern: /\/\*([\s\S]*?)\*\//g,
-							replacement: ''
-						},
-						// Remove query strings from static resources ie ?v=3.0.1
-						{
-							pattern: /\?[\w=\.]+/g,
-							replacement: ''
-						}
-					]
-				},
-				files: [
-					{
-						expand: true,
-						dot: true,
-						cwd: '<%= yeoman.dist %>',
-						dest: '<%= yeoman.dist %>',
-						src: ['css/**/*.css']
 					}
 				]
 			}
+
 		},
 		jshint: {
 			options: {
@@ -187,7 +124,7 @@ module.exports = function(grunt) {
 				'<%= yeoman.app %>/scripts/**/*.js',
 				'!<%= yeoman.app %>/scripts/ga.js',
 				'!<%= yeoman.app %>/scripts/lib/**/*.js',
-				//'test/**/*.js', '!test/lib/**/*.js',
+				'test/**/*.js', '!test/lib/**/*.js',
 				'!**/_*'
 			]
 		}
@@ -206,8 +143,15 @@ module.exports = function(grunt) {
 
 	// Test tasks.
 	grunt.registerTask('lint', [
-		'replace:jslint',
+		//'replace:jslint',
 		'jshint'
+		//'replace:csslint'
+	]);
+	grunt.registerTask('lintclean', [
+		'replace:whitespace'//,
+		//'replace:jslint',
+		//'replace:htmllint'
+		//'replace:csslint'
 	]);
 	grunt.registerTask('test', ['lint', 'karma:test']);
 	grunt.registerTask('test-server', ['karma:server']);

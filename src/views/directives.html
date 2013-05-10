@@ -4,12 +4,12 @@
 	<form name="form">
 		<input type="text" name="password" data-ng-model="inputValue" data-sameas="sameas" data-password-check required>
 		<span class="help-block error" data-ng-show="form.password.$error.minlength">Password too short, must be {{settings.password.min_length}} or more</span>
-        <span class="help-block error" data-ng-show="form.password.$error.lower">Password needs at least one lower case letter</span>
-        <span class="help-block error" data-ng-show="form.password.$error.upper">Password needs at least one upper case letter</span>
-        <span class="help-block error" data-ng-show="form.password.$error.number">Password needs at least one number</span>
-        <span class="help-block error" data-ng-show="form.password.$error.special">Password needs at least one special character (!"£$%&...)</span>
-        <span class="help-block error" data-ng-show="form.password.$error.identical">Password cannot have more than two identical characters</span>
-        <span class="help-block" data-ng-show="objectLength(form.password.$error) > 2">Our intern could crack that password, best to be safe and make it stronger.</span>
+		<span class="help-block error" data-ng-show="form.password.$error.lower">Password needs at least one lower case letter</span>
+		<span class="help-block error" data-ng-show="form.password.$error.upper">Password needs at least one upper case letter</span>
+		<span class="help-block error" data-ng-show="form.password.$error.number">Password needs at least one number</span>
+		<span class="help-block error" data-ng-show="form.password.$error.special">Password needs at least one special character (!"£$%&...)</span>
+		<span class="help-block error" data-ng-show="form.password.$error.identical">Password cannot have more than two identical characters</span>
+		<span class="help-block" data-ng-show="objectLength(form.password.$error) > 2">Our intern could crack that password, best to be safe and make it stronger.</span>
 	</form>
 </div>
 
