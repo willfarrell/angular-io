@@ -9,7 +9,7 @@ angular.module('io.factories')
 .factory('$config', ['io.config', '$http', function(config, $http) {
 	//console.log('localStorage');
 	var $scope = {};
-	
+
 	$scope.get = function(id, default_obj, callback) {
 		if (config[id] && typeof(config[id]) === 'string' && config[id].substr(-4) === 'json') {
 			$http.get(config[id])
@@ -25,7 +25,7 @@ angular.module('io.factories')
 			callback(config[id] || default_obj);
 		}
 	};
-	
-	
+
+
 	return $scope;
 }]);

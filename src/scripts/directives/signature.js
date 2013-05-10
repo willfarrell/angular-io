@@ -26,16 +26,16 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 			console.log(element);
 			console.log(attrs);
 			console.log(controller);
-			
+
 			//canvas = element.children()[0];
 			canvas = element[0];
 			ctx = canvas.getContext('2d');
-				
+
 			// functions
 			function mouseOffset(e) {
 				// get offsets
 				var pageX,pageY, totalOffsetX = 0, totalOffsetY = 0, currentElement = canvas;
-				
+
 				// global position of mouse pointer
 				/*if (e.pageX || e.pageY) {
 					pageX = e.pageX;
@@ -45,21 +45,21 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 					pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
 					pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 				}*/
-			
+
 				// global position of canvas top-left
 				do{
 					totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
 					totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
 				}
 				while(currentElement = currentElement.offsetParent);
-				
+
 				// calc grab offset - on mouse down only
 				return {
 					top:(e.clientY - totalOffsetY),
 					left:(e.clientX - totalOffsetX)
 				};
 			}
-			
+
 			function drawLine(e) {
 				var offset = mouseOffset(e);
 				var newX = offset.left,
@@ -67,14 +67,14 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 				if (previous.x === newX && previous.y === newY) { return; }
 				if (previous.x === null) { previous.x = newX; }
 				if (previous.y === null) { previous.y = newY; }
-				
+
 				ctx.beginPath();
 				ctx.moveTo(previous.x, previous.y);
 				ctx.lineTo(newX, newY);
 				//ctx.lineCap = settings.penCap
 				ctx.stroke();
 				ctx.closePath();
-				
+
 				output.push({
 					'lx': newX,
 					'ly': newY,
@@ -83,19 +83,19 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 				});
 				previous.x = newX;
 				previous.y = newY;
-				
+
 				controller.$modelValue = output;
 				controller.$setValidity('signature', true);
 			}
-		
-			
-			
+
+
+
 			function clear() {
 				ctx.save();
 				ctx.setTransform(1, 0, 0, 1, 0, 0);
 				ctx.clearRect(0, 0, canvas.width, canvas.height);
 				ctx.restore();
-				
+
 				// init draw
 				// x ---------- // 'x ' = 8px, '- ' = 4px
 				var padding = 10, dash = '';
@@ -105,11 +105,11 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 				ctx.font = '15px sans-serif';	// set text font
 				ctx.textBaseline = 'bottom';	// set text position
 				ctx.fillText('x'+dash, padding, canvas.height - padding); // str, x, yield
-				
+
 				// set validity false
 				controller.$setValidity('signature', false);
 			}
-			
+
 			canvas.onmousedown = function(e) {
 				previous.x = null;
 				previous.y = null;
@@ -121,9 +121,9 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 				previous.x = null;
 				previous.y = null;
 			};
-			
+
 			// catch render
-			
+
 			function drawSignature(paths, context) {
 				for (var i in paths) {
 					if (typeof paths[i] === 'object') {
@@ -136,7 +136,7 @@ angular.module('io.directives').directive('signature', ['io.config', function(co
 					}
 				}
 			}
-			
+
 			controller.$render = function() {
 				output = controller.$modelValue || [];
 				clear();

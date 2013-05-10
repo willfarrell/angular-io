@@ -9,7 +9,7 @@ TODO
 
 angular.module('io.filters')
 .filter('ordinal', ['$locale', function($locale) {
-	
+
 	// http://en.wikipedia.org/wiki/Ordinal_indicator
 	// locale - http://typophile.com/node/42577
 	var lang = $locale.id.substr(0,2);
@@ -26,10 +26,10 @@ angular.module('io.filters')
 	} else {
 		$locale.ordinal = ['','','',''];
 	}
-	
+
 	// load in locale
 	var append = $locale.ordinal;
-	
+
 	return function(num) {
 		if (parseFloat(num) === parseInt(num, 10) && !isNaN(num)) {
 			var value=num%100;

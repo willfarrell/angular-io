@@ -18,18 +18,18 @@ angular.module('io.directives')
 				var json = JSON.parse(value),
 					json_sort = {},
 					keys = Object.keys(json);
-				
+
 				keys.sort();
-				
+
 				for (var i = 0, l = keys.length; i < l; i++) {
 					if (json[keys[i]] !== '') {
 						json_sort[keys[i]] = json[keys[i]];
 					}
 				}
-				
+
 				return JSON.stringify(json_sort);
 			}
-			
+
 			function check(value) {
 				//console.log('requireChange(', original, value, ')');
 				if (value) { value = prepare(value); }
@@ -37,16 +37,14 @@ angular.module('io.directives')
 				if (!original && value !== '{}') {
 					original = value;
 				}
-				
+
 				// check
 				//console.log(original, '==', value);
-				//$timeout(function(){
-					if (original === value) {
-						scope.form.$invalid = true;
-					} else if (scope.form.$valid === true) {
-						scope.form.$invalid = false;
-					}
-				//},0);
+				if (original === value) {
+					scope.form.$invalid = true;
+				} else if (scope.form.$valid === true) {
+					scope.form.$invalid = false;
+				}
 				/*if (original === value) {
 					console.log('disable');
 					scope.form.$invalid = true;
@@ -54,7 +52,7 @@ angular.module('io.directives')
 					scope.form.$invalid = false;
 				}*/
 			}
-			
+
 			attrs.$observe('requireChange', check);
 			//attrs.$observe('requireChange', function() { $timeout(check,0); });
 		}

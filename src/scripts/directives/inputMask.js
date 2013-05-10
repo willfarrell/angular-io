@@ -11,21 +11,21 @@ angular.module('io.directives')
 			console.log(attrs);
 			console.log(controller);
 			*/
-			
+
 			//console.log($filter('format'));
-			
+
 			function mask() {
 				if (!controller.$viewValue) { return; }
-				
+
 				var value = $filter('format')(controller.$viewValue, attrs.inputMask);
 				element.val(value);
 				controller.$setViewValue(value.replace(/[^a-zA-Z0-9]+/g,''));
 			}
-			
+
 			// view -> model
 			element.bind('keyup', function(event) {
 				//console.log('inputMask');
-				
+
 				// see ui-keypressHelper
 				var shiftPressed = event.shiftKey;
 				var keyCode = event.keyCode;
@@ -40,12 +40,12 @@ angular.module('io.directives')
 					});
 				}
 			});
-			
+
 			// model -> view
 			controller.$render = function() {
 				mask();
 			};
-			
+
 			mask();
 		}
 	};

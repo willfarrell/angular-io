@@ -2,7 +2,7 @@ angular.module('io.filters')
 .filter('range', function() {
 	return function(input, start, end, step) {
 		var tmp, i;
-		
+
 		if (!end || isNaN(end)) {
 			end = start;
 			start = 0;

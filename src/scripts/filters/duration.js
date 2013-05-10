@@ -16,17 +16,17 @@ angular.module('io.filters')
 			date = new Date(),
 			dow = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
 			past = (timestamp < now); // is timestamp in the past?
-		
+
 		if (Seconds < 0) { Seconds *= -1; }
-		
+
 		// month
-		
+
 		// week
-		
+
 		// day
 		var Days = Math.floor(Seconds / 86400);
 		Seconds -= Days * 86400;
-		
+
 		if (past) {
 			date = new Date(now - Days * 86400 * 1000);
 			if (Days === 1) {
@@ -41,11 +41,11 @@ angular.module('io.filters')
 		} else if (Days === 1) {
 			return Days + ' day';
 		}
-		
+
 		// hour
 		var Hours = Math.floor(Seconds / 3600);
 		Seconds -= Hours * (3600);
-		
+
 		if (past && Hours > 3) {
 			return date.getHours()+':'+date.getMinutes();
 		} else if (Hours > 1) {
@@ -53,16 +53,16 @@ angular.module('io.filters')
 		} else if (Hours === 1) {
 			return Hours + ' hour';
 		}
-		
+
 		// min
 		var Minutes = Math.floor(Seconds / 60);
 		Seconds -= Minutes * (60);
 		if (Minutes > 0) { return (Minutes > 1) ? Minutes + ' minutes': Minutes + ' minute'; }
-		
+
 		// sec
 		Seconds = Math.floor(Seconds);
 		if (Seconds >= 1) { return (Seconds > 1) ? Seconds + ' seconds': Seconds + ' second'; }
-		
+
 		return '';
 	};
 });

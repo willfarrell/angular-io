@@ -4,7 +4,7 @@ angular.module('io.filters')
 		string = string.toString();
 		length = parseInt(length, 10) || 1;
 		pad_char = pad_char || ' ';
-		
+
 		while (string.length < length) {
 			string = append ? string+pad_char : pad_char+string;
 		}

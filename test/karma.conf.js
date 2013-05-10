@@ -1,7 +1,5 @@
 /*globals
-LOG_DISABLE:true, LOG_ERROR:true, LOG_WARN:true, LOG_INFO:true, LOG_DEBUG:true,
-ANGULAR_SCENARIO:true, ANGULAR_SCENARIO_ADAPTER:true,
-JASMINE:true, JASMINE_ADAPTER:true,
+LOG_DISABLE:true, LOG_ERROR:true, LOG_WARN:true, LOG_INFO:true, LOG_DEBUG:true
 */
 
 // Testacular configuration
@@ -11,19 +9,17 @@ JASMINE:true, JASMINE_ADAPTER:true,
 var basePath = '..',
 	urlRoot = '/src/',
 
-//frameworks = ['jasmine'];
+frameworks = ['jasmine']; // 'requirejs' for ANGULAR_SCENARIO:true, ANGULAR_SCENARIO_ADAPTER:true,
 
 // list of files / patterns to load in the browser
 files = [
-  ANGULAR_SCENARIO, ANGULAR_SCENARIO_ADAPTER,
-  JASMINE, JASMINE_ADAPTER,
   'test/lib/angular.js',
   'test/lib/**/*.js',
-  
+
   'src/scripts/app.js',
   'src/scripts/lib/**/*.js',
-  
-  
+
+
   'src/scripts/factories/config.js',
   //'src/scripts/**/*.js',
   'src/scripts/directives/*.js',
@@ -31,7 +27,7 @@ files = [
   'src/scripts/filters/format.js',
   'src/scripts/filters/pad.js',
   'src/scripts/filters/*.js',
-  
+
   'test/unit/**/*.js'
 ],
 
@@ -75,6 +71,7 @@ autoWatch = false,
 // - Opera
 // - Safari
 // - PhantomJS
+// - IE (only Windows)
 browsers = ['PhantomJS'],
 
 // If browser does not capture in given timeout [ms], kill it
@@ -100,5 +97,9 @@ plugins = [
   'karma-jasmine',
   'karma-chrome-launcher',
   'karma-firefox-launcher',
+  //'karma-opera-launcher',
+  //'karma-safari-launcher',
+  'karma-phantomjs-launcher',
+  'karma-script-launcher',
   'karma-junit-reporter'
 ];

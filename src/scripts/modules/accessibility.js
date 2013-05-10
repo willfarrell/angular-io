@@ -54,7 +54,7 @@ angular.module('io.modules')
 			element.bind('mousemove', function(e) {
 				ruler.css('top', (e.clientY - 20)+'px');
 			});
-			
+
 		}
 	};
 }])
@@ -63,13 +63,13 @@ angular.module('io.modules')
 .factory('$accessibility', ['$rootScope', '$http', function($rootScope, $http) {
 	console.log('AccessibilityFactory ('+$rootScope.$id+')');
 	var $scope = {};
-	
+
 	$scope.settings = db.get('accessibility', {
 		'accessibility':false
 		//'dyslexic':false,
 		//'zoom':1
 	});
-	
+
 	$scope.init = function() {
 		console.log('$accessibility.init()');
 		// accessibility
@@ -79,18 +79,18 @@ angular.module('io.modules')
 		// zoom
 		//$scope.zoom($scope.settings.zoom);
 	};
-	
+
 	$scope.save = function() {
 		db.set('accessibility', $scope.settings);
 		console.log($scope.settings);
 	};
-	
+
 	$scope.toggle = function() {
 		console.log('$accessibility.toggle()');
 		$scope.settings.accessibility = !($scope.settings.accessibility);
 		$scope.load();
 	};
-	
+
 	$scope.load = function() {
 		console.log('$accessibility.load()');
 		var elem = angular.element(document.querySelector('body'));
@@ -101,7 +101,7 @@ angular.module('io.modules')
 		}
 		$scope.save();
 	};
-	
+
 	// settings zoom function
 	/*$scope.zoom = function(zoom) {
 		zoom = zoom || 1;
@@ -111,10 +111,10 @@ angular.module('io.modules')
 		document.body.style['font-size'] = ($scope.settings.zoom * 100) +'%';
 		$scope.save();
 	};*/
-	
+
 	$rootScope.$watch($rootScope, function() {
 		$scope.init();
 	});
-	
+
 	return $scope; // important
 }]);

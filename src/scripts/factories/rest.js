@@ -11,14 +11,14 @@ $rest(http_config, http_callback, cache_ID, cache_key)
 angular.module('io.factories')
 .factory('$rest', ['io.config', '$rootScope', '$http', '$cookies', '$localStorage', '$offline', function(config, $rootScope, $http, $cookies, $localStorage, $offline) {
 	console.log('restFactory');
-	
+
 	var $scope = {};
-	
+
 	$scope.reset = function() {
 		$rootScope.alerts = [];
 		$rootScope.errors = {};
 	};
-	
+
 	$scope.check = function(data, status, headers, config) {
 		console.log(data);
 		var result = true;
@@ -43,15 +43,15 @@ angular.module('io.factories')
 		// if all good return true
 		return result;
 	};
-	
-	
+
+
 	$scope.http = function(http_config, http_success_callback, http_error_callback) { // , $keyDB, cacke_key
 		console.log(http_config, http_success_callback, http_error_callback);
 		// if there is a cache, load it in now, update with request later
 		/*if (http_config.method === 'get' && cache_key) {
-			
+
 		}*/
-		
+
 		$http(http_config)
 			.success(function(data, status, headers, config) {
 				console.log('restFactory.'+http_config.method+'.success');
@@ -69,7 +69,7 @@ angular.module('io.factories')
 				if (http_error_callback) { http_error_callback(data); }
 			});
 	};
-	
+
 	return $scope;
 }]);
 

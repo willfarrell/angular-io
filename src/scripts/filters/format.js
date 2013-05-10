@@ -41,7 +41,7 @@ angular.module('io.filters')
 				output += f;
 				mask_pos++;
 			}
-	
+
 		}
 		return output;
 	};
