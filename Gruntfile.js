@@ -106,7 +106,7 @@ module.exports = function(grunt) {
 						dest: '',
 						src: [
 							'<%= yeoman.app %>/*.{css,js,html}',
-							'<%= yeoman.app %>/{scripts,styles,views}/*.{css,js,html}',
+							'<%= yeoman.app %>/{scripts,styles,views}/**/*.{css,js,html}',
 							'*.js',
 							'test/**/*.js', '!test/lib/*.js'
 						]
@@ -124,7 +124,7 @@ module.exports = function(grunt) {
 				'<%= yeoman.app %>/scripts/**/*.js',
 				'!<%= yeoman.app %>/scripts/ga.js',
 				'!<%= yeoman.app %>/scripts/lib/**/*.js',
-				'test/**/*.js', '!test/lib/**/*.js',
+				//'test/**/*.js', '!test/lib/**/*.js',
 				'!**/_*'
 			]
 		}

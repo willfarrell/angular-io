@@ -15,6 +15,11 @@ angular.module('io.factories')
 			$http.get(config[id])
 				.success(function(data, status){
 					config[id] = data;
+					/*for (var i in data) {
+						if (data.hasOwnProperty(i)) {
+							config[i] = data[i];
+						}
+					}*/
 					if (status === 200) {
 						callback(data);
 					} else {

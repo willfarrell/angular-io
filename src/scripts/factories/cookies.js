@@ -11,9 +11,9 @@
 	'use strict';
 
 	/**
-	 * @ngdoc overview
-	 * @name ngCookies
-	 */
+	* @ngdoc overview
+	* @name ngCookies
+	*/
 
 
 	angular.module('ngCookies', ['ng'])
@@ -56,7 +56,7 @@
 			*/
 			$scope.get = function(key) {
 				// angular.fromJson($cookies[key]);
-				var nameEQ = key + '=',
+				var keyEQ = key + '=',
 					ca = doc.cookie.split(';'),
 					cookies = {},
 					cookie,
@@ -64,19 +64,21 @@
 				for (i = 0; i < ca.length; i++) {
 					c = ca[i];
 					while (c.charAt(0) === ' ') { c = c.substr(1); }
-					if (key && c.indexOf(nameEQ) === 0) { return c.substr(nameEQ.length);}
+					if (key && c.indexOf(keyEQ) === 0) { return c.substr(keyEQ.length);}
 					else if (c) {
 						cookie = c.split('='),
 						cookies[cookie[0]] = cookie[1];
 					}
 				}
-				if (name) { return null; }
+				if (key) { return null; }
 				else { return cookies; }
 			};
 
 			$scope.put = function(key, value, params) {
 				params = params || {};
-				var expires = '', date, cookie_string, i;
+				var expires = '', date,
+					cookie_string, i,
+					current_cookies = doc.cookie;
 
 				if (typeof(value) === 'undefined' || value === null) {
 					value = '';
@@ -105,7 +107,13 @@
 				if ( config.secure ) {
 					cookie_string += '; secure';
 				}
+
 				doc.cookie = cookie_string;
+
+				if (doc.cookie.length > 4096) {
+					console.warn('Cookie "'+ key +'" possibly not set or overflowed because it was too large (' + doc.cookie.length + ' > 4096 bytes)!');
+					doc.cookies = current_cookies;
+				}
 			};
 
 			$scope.remove = function(key) {
@@ -193,8 +201,8 @@
 
 			//creates a poller fn that copies all cookies from the $browser to service & inits the service
 			$browser.addPollFn(function() {
-				//var currentCookies = $browser.cookies();
-				var currentCookies = $cookie.get();
+				var currentCookies = $browser.cookies();
+				//var currentCookies = $cookie.get();
 				if (lastBrowserCookies !== currentCookies) { //relies on browser.cookies() impl
 					lastBrowserCookies = currentCookies;
 					copy(currentCookies, lastCookies);
