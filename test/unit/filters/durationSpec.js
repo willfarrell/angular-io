@@ -33,7 +33,7 @@ describe('duration', function() {
 		expect(durationFilter((now - 3 * 24 * 60 * 60 * 1000))).toEqual(dow[date.getDay()]+' '+filter('pad')(date.getHours(), 2, '0')+':'+filter('pad')(date.getMinutes(), 2, '0'));
 
 		date = new Date(now - 7 * 24 * 60 * 60 * 1000);
-		expect(durationFilter((now - 7 * 24 * 60 * 60 * 1000))).toEqual(date.getFullYear()+'-'+filter('pad')(date.getMonth(), 2, '0')+'-'+filter('pad')(date.getDay(), 2, '0')+' '+filter('pad')(date.getHours(), 2, '0')+':'+filter('pad')(date.getMinutes(), 2, '0'));
+		expect(durationFilter((now - 7 * 24 * 60 * 60 * 1000))).toEqual(date.getFullYear()+'-'+filter('pad')(date.getMonth()+1, 2, '0')+'-'+filter('pad')(date.getDay(), 2, '0')+' '+filter('pad')(date.getHours(), 2, '0')+':'+filter('pad')(date.getMinutes(), 2, '0'));
 	});
 
 	// since this is related to future, slower computers may fail here (+1sec to counter this)

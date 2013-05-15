@@ -34,7 +34,7 @@ angular.module('io.filters')
 			} else if (Days && Days < 7) {
 				return dow[date.getDay()]+' '+$filter('pad')(date.getHours(), 2, '0')+':'+$filter('pad')(date.getMinutes(), 2, '0');
 			} else if (Days) {
-				return date.getFullYear()+'-'+$filter('pad')(date.getMonth(), 2, '0')+'-'+$filter('pad')(date.getDay(), 2, '0')+' '+$filter('pad')(date.getHours(), 2, '0')+':'+$filter('pad')(date.getMinutes(), 2, '0');
+				return date.getFullYear()+'-'+$filter('pad')(date.getMonth()+1, 2, '0')+'-'+$filter('pad')(date.getDay(), 2, '0')+' '+$filter('pad')(date.getHours(), 2, '0')+':'+$filter('pad')(date.getMinutes(), 2, '0');
 			}
 		} else if (Days > 1) {
 			return Days + ' days';
