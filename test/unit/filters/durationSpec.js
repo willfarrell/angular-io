@@ -2,11 +2,12 @@
 
 describe('duration', function() {
 	var durationFilter,
-		now, date,
+		now, date, filter,
 		dow = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
 	beforeEach(module('io.filters'));
 	beforeEach(inject(function($filter) {
+		filter = $filter
 		durationFilter = $filter('duration');
 	}));
 
@@ -23,16 +24,16 @@ describe('duration', function() {
 		expect(durationFilter((now - 2 * 60 * 1000))).toEqual('2 minutes');
 		expect(durationFilter((now - 1 * 60 * 60 * 1000))).toEqual('1 hour');
 		expect(durationFilter((now - 2 * 60 * 60 * 1000))).toEqual('2 hours');
-		expect(durationFilter((now - 5 * 60 * 60 * 1000))).toEqual(date.getHours()+':'+date.getMinutes());
+		expect(durationFilter((now - 5 * 60 * 60 * 1000))).toEqual(filter('pad')(date.getHours(), 2, '0')+':'+filter('pad')(date.getMinutes(), 2, '0'));
 
 		date = new Date(now - 1 * 24 * 60 * 60 * 1000);
-		expect(durationFilter((now - 1 * 24 * 60 * 60 * 1000))).toEqual('yesterday '+date.getHours()+':'+date.getMinutes());
+		expect(durationFilter((now - 1 * 24 * 60 * 60 * 1000))).toEqual('yesterday '+filter('pad')(date.getHours(), 2, '0')+':'+filter('pad')(date.getMinutes(), 2, '0'));
 
 		date = new Date(now - 3 * 24 * 60 * 60 * 1000);
-		expect(durationFilter((now - 3 * 24 * 60 * 60 * 1000))).toEqual(dow[date.getDay()]+' '+date.getHours()+':'+date.getMinutes());
+		expect(durationFilter((now - 3 * 24 * 60 * 60 * 1000))).toEqual(dow[date.getDay()]+' '+filter('pad')(date.getHours(), 2, '0')+':'+filter('pad')(date.getMinutes(), 2, '0'));
 
 		date = new Date(now - 7 * 24 * 60 * 60 * 1000);
-		expect(durationFilter((now - 7 * 24 * 60 * 60 * 1000))).toEqual(date.getFullYear()+' '+date.getMonth()+' '+date.getDay()+' '+date.getHours()+':'+date.getMinutes());
+		expect(durationFilter((now - 7 * 24 * 60 * 60 * 1000))).toEqual(date.getFullYear()+'-'+filter('pad')(date.getMonth(), 2, '0')+'-'+filter('pad')(date.getDay(), 2, '0')+' '+filter('pad')(date.getHours(), 2, '0')+':'+filter('pad')(date.getMinutes(), 2, '0'));
 	});
 
 	// since this is related to future, slower computers may fail here (+1sec to counter this)

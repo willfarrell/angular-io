@@ -9,7 +9,7 @@ TODO
 */
 
 angular.module('io.filters')
-.filter('duration', function() {
+.filter('duration', ['$filter', function($filter) {
 	return function(timestamp) {
 		var now = +new Date(),
 			Seconds = (now - timestamp)/1000,
@@ -30,11 +30,11 @@ angular.module('io.filters')
 		if (past) {
 			date = new Date(now - Days * 86400 * 1000);
 			if (Days === 1) {
-				return 'yesterday '+date.getHours()+':'+date.getMinutes();
+				return 'yesterday '+$filter('pad')(date.getHours(), 2, '0')+':'+$filter('pad')(date.getMinutes(), 2, '0');
 			} else if (Days && Days < 7) {
-				return dow[date.getDay()]+' '+date.getHours()+':'+date.getMinutes();
+				return dow[date.getDay()]+' '+$filter('pad')(date.getHours(), 2, '0')+':'+$filter('pad')(date.getMinutes(), 2, '0');
 			} else if (Days) {
-				return date.getFullYear()+' '+date.getMonth()+' '+date.getDay()+' '+date.getHours()+':'+date.getMinutes();
+				return date.getFullYear()+'-'+$filter('pad')(date.getMonth(), 2, '0')+'-'+$filter('pad')(date.getDay(), 2, '0')+' '+$filter('pad')(date.getHours(), 2, '0')+':'+$filter('pad')(date.getMinutes(), 2, '0');
 			}
 		} else if (Days > 1) {
 			return Days + ' days';
@@ -47,7 +47,7 @@ angular.module('io.filters')
 		Seconds -= Hours * (3600);
 
 		if (past && Hours > 3) {
-			return date.getHours()+':'+date.getMinutes();
+			return $filter('pad')(date.getHours(), 2, '0')+':'+$filter('pad')(date.getMinutes(), 2, '0');
 		} else if (Hours > 1) {
 			return Hours + ' hours';
 		} else if (Hours === 1) {
@@ -65,7 +65,7 @@ angular.module('io.filters')
 
 		return '';
 	};
-});
+}]);
 
 /*
 

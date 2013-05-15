@@ -11,6 +11,10 @@
 	<!-- build:css css/app.min.css -->
 	<link rel="stylesheet" href="styles/bootstrap.css"><!-- compile after bower -->
 	<link rel="stylesheet" href="styles/accessibility.css">
+	
+	<!-- angular-modernizr-->
+	<link rel="stylesheet" href="components/angular-modernizr/src/styles/forms-placeholder.css">
+	<link rel="stylesheet" href="components/angular-modernizr/src/styles/forms-reveal.text.css">
 	<!-- endbuild -->
 
 </head>
@@ -28,7 +32,8 @@
 <script src="scripts/ie.js"></script>
 <script src="scripts/app.js"></script>
 <script>
-angular.module('app', ['io', 'ngCookies']);
+angular.module('io.modernizr', []);
+angular.module('app', ['io', 'io.modernizr', 'ngCookies']);
 
 angular.module('app')
 .config(['$routeProvider', function($routeProvider) {
@@ -157,7 +162,7 @@ function FilterCtrl($scope, $timeout) {
 <script src="scripts/filters/format.js"></script>
 <script src="scripts/filters/pad.js"></script>
 
-<script src="scripts/filters/colorHash.js"></script><!-- requires $filter('pad') -->
+<script src="scripts/filters/colorHash.js"></script>
 <script src="scripts/filters/duration.js"></script>
 <script src="scripts/filters/markdown.js"></script><!-- requires components/marked/lib/marked.js -->
 <script src="scripts/filters/objectArray.js"></script>
@@ -166,7 +171,9 @@ function FilterCtrl($scope, $timeout) {
 <script src="scripts/filters/range.js"></script>
 <script src="scripts/filters/truncate.js"></script>
 
-
+<!-- angular-modernizr-->
+<script src="components/angular-modernizr/src/scripts/placeholder.js"></script>
+<script src="components/angular-modernizr/src/scripts/reveal.text.js"></script>
 
 </body>
 </html>
