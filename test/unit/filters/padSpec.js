@@ -1,5 +1,3 @@
-/*globals describe:true, beforeEach:true, inject:true, it:true, expect:true */
-
 describe('pad', function() {
 	var padFilter;
 
