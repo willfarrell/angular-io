@@ -10,6 +10,8 @@
 		<span class="help-block error" data-ng-show="form.password.$error.special">Password needs at least one special character (!"£$%&...)</span>
 		<span class="help-block error" data-ng-show="form.password.$error.identical">Password cannot have more than two identical characters</span>
 		<span class="help-block" data-ng-show="objectLength(form.password.$error) > 2">Our intern could crack that password, best to be safe and make it stronger.</span>
+		{{form.$invalid}} || {{form.password.$invalid}}
+		<button class="btn" data-ng-disabled="form.$invalid || form.password.$invalid">Save</button>
 	</form>
 </div>
 

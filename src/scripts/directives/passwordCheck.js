@@ -81,6 +81,18 @@ angular.module('io.directives')
 
 				controller.$error.sameas = (value === attrs.sameas);
 
+				controller.$invalid = (
+					controller.$error.minlength ||
+					controller.$error.identical ||
+					controller.$error.lower ||
+					controller.$error.upper ||
+					controller.$error.number ||
+					controller.$error.special ||
+					controller.$error.other ||
+					controller.$error.subset ||
+					controller.$error.sameas
+				);
+				controller.$valid = !controller.$invalid;
 			}
 
 			element.bind('keyup', function() { $timeout(check,0); });
