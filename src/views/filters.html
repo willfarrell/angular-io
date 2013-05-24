@@ -19,3 +19,11 @@
 		<li data-ng-repeat="item in filter.duration.list">{{item}} -> {{item | duration}}</li>
 	</ul>
 </div>
+
+<h3>markdown</h3>
+<div class="well">
+	<div class="row">
+		<div class="span5"><textarea data-ng-model="markdown" rows="7"></textarea></div>
+		<div class="span5" data-ng-bind-html-unsafe="(markdown | markdown)"></div>
+	</div>
+</div>
