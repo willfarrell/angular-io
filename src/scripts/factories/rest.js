@@ -13,12 +13,14 @@ angular.module('io.factories')
 	console.log('restFactory');
 
 	var $scope = {};
-	
+
 	// copy config over
-	for (i in config.http) {
-		$scope[i] = config.http[i];
+	for (var i in config.http) {
+		if (config.http.hasOwnProperty(i)) {
+			$scope[i] = config.http[i];
+		}
 	}
-	
+
 	$scope.reset = function() {
 		$rootScope.alerts = [];
 		$rootScope.errors = {};
