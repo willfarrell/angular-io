@@ -20,7 +20,8 @@
     "grunt-karma": "~0.4.4",
     "grunt-contrib-jshint": "~0.5.4",
     "grunt-string-replace": "~0.2.4",
-    "matchdep": "~0.1.2"
+    "matchdep": "~0.1.2",
+    "karma-junit-reporter": "0.0.1"
   },
   "scripts": {
     "test": "karma start test/karma.conf.js --single-run --browsers PhantomJS",
