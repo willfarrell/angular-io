@@ -1,0 +1,4 @@
+<VirtualHost *:8888>
+    ServerName angulario
+    DocumentRoot __DIR__/src
+</VirtualHost>
