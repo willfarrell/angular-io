@@ -8,6 +8,11 @@
 		"type": "git",
 		"url": "git://github.com/willfarrell/angular-io.git"
 	},
+	"ignore": {
+		"**/.*",
+		"node_modules",
+		"components"
+	},
 	"dependencies": {
 		"angular": ">= 1.0.5",
 		"angular-mocks": ">= 1.0.5",
