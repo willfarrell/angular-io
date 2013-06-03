@@ -15,7 +15,6 @@ angular.module('io.directives')
 			*/
 			
 			function init() {
-				console.log('init');
 				original = null;
 				check(attrs.requireChange);
 			}
