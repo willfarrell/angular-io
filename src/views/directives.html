@@ -17,13 +17,15 @@
 <div class="well" data-ng-controller="AppCtrl">
 	<form name="form">
 		<input type="text" data-ng-model="requirechange.name">
+		<input type="text" data-ng-model="requirechange.name2">
 		<div class="btn" data-require-change="{{requirechange}}" data-ng-disabled="form.$invalid">Save</div>
 	</form>
 </div>
 <div class="well" data-ng-controller="AppCtrl">
 	<form name="form">
 		<input type="text" data-ng-model="requirechange2.name">
-		<div class="btn" data-require-change="{{requirechange2}}" data-ng-disabled="form.$invalid">Save</div>
+		<input type="text" data-ng-model="requirechange2.name2">
+		<div class="btn" data-require-change="{{requirechange2}}" data-ng-disabled="form.$invalid" data-ng-click="">Save</div>
 	</form>
 </div>
 

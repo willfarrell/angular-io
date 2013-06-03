@@ -52,7 +52,13 @@ angular.module('app')
 }]);
 
 function AppCtrl($scope, $timeout, $cookies) {
-	var now = +new Date();
+	var now = $scope.now = +new Date();
+	
+	$scope.updateNow = function() {
+		console.log('updateNow');
+		$scope.now = +new Date();
+	}
+	
 	$scope.filter = {};
 	$scope.filter.colorHash = {custom:'', list:['colorHash', 'to do', 'friends', 'to read']};
 	$scope.filter.duration = {custom:now, list:[

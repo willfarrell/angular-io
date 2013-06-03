@@ -13,6 +13,13 @@ angular.module('io.directives')
 			console.log(attrs);
 			console.log(controller);
 			*/
+			
+			function init() {
+				console.log('init');
+				original = null;
+				check(attrs.requireChange);
+			}
+			
 			function prepare(value) {
 				// sort and remove blank elems
 				var json = JSON.parse(value),
@@ -52,9 +59,9 @@ angular.module('io.directives')
 					scope.form.$invalid = false;
 				}*/
 			}
-
+			
+			element.bind('click', function() { init(); });
 			attrs.$observe('requireChange', check);
-			//attrs.$observe('requireChange', function() { $timeout(check,0); });
 		}
 	};
 }]);
