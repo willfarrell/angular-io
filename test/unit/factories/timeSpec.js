@@ -1,3 +1,4 @@
+// use jasmine.Clock.tick(101); ??
 describe('time', function() {
 	var timeFactory;
 
