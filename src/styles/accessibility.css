@@ -66,7 +66,7 @@
 	font-size: 14px;
 	line-height: 200%;
 	margin: auto 0;
-	padding: 0 100;
+	padding: 0px 100px;
 	color: #1A0033;
 }
 
@@ -79,7 +79,7 @@
 .accessibility h3,
 .accessibility h4,
 .accessibility .highlight {
-	font-style: bold;
+	font-weight: bold;
 	/*color: black;*/
 }
 .accessibility .highlight {
