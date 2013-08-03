@@ -26,8 +26,8 @@ angular.module('io.factories')
 		$rootScope.errors = {};
 	};
 
-	$scope.check = function(data, status, headers, config) {
-		console.log(data);
+	$scope.success = function(data, status, headers, config) {
+		console.log(data, status, headers, config);
 		var result = true;
 		// session check ... signout?
 		if (data.session === 'signout') {
@@ -50,6 +50,27 @@ angular.module('io.factories')
 		// if all good return true
 		return result;
 	};
+	
+	$scope.error = function(data, status, headers, config) {
+		console.log(data, status, headers, config);
+		var result = false;
+		
+		// Error
+		if (status === 400) {
+			console.log(data,headers,config);
+		}
+		
+		// Unauthorized
+		if (status === 401) {
+			//$rootScope.offline.que_request(http_config, http_callback);
+			/*if ($rootScope.uri().match(/\/sign\//) === null) { // prevent redirect loop
+				$cookies.redirect = $rootScope.uri();
+				$rootScope.href('/sign/out');
+			}*/
+		}
+		
+		return result;
+	};
 
 
 	$scope.http = function(http_config, http_success_callback, http_error_callback) { // , $keyDB, cacke_key
@@ -62,7 +83,7 @@ angular.module('io.factories')
 		$http(http_config)
 			.success(function(data, status, headers, config) {
 				console.log('restFactory.success ', http_config.method, http_config.url, http_config.data);
-				if ($scope.check(data, status, headers, config)) {
+				if ($scope.success(data, status, headers, config)) {
 					// cache in localstorage
 					// ** do
 					// callback
@@ -71,9 +92,14 @@ angular.module('io.factories')
 			})
 			.error(function(data, status, headers, config) {
 				console.log('restFactory.error', http_config.method, http_config.url, http_config.data);
-				$rootScope.alerts.push({'class':'error', 'label':'Connection Error:', 'message':'We were unable to complete your request at this time.'});
-				$offline.que_request(http_config, http_success_callback);
-				if (http_error_callback) { http_error_callback(data); }
+				if ($scope.error(data, status, headers, config)) {
+					$rootScope.alerts.push({'class':'error', 'label':'Connection Error:', 'message':'We were unable to complete your request at this time.'});
+					$offline.que_request(http_config, http_success_callback);
+				} else {
+					if (http_error_callback) { http_error_callback(data); }
+				}
+				
+				
 			});
 	};
 
