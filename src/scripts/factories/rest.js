@@ -29,6 +29,8 @@ angular.module('io.factories')
 	$scope.success = function(data, status, headers, config) {
 		console.log(data, status, headers, config);
 		var result = true;
+		if (data == result) return result;
+		
 		// session check ... signout?
 		if (data.session === 'signout') {
 			//$rootScope.offline.que_request(http_config, http_callback);
