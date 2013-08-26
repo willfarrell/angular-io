@@ -64,11 +64,14 @@ angular.module('io.modules')
 	console.log('AccessibilityFactory ('+$rootScope.$id+')');
 	var $scope = {};
 
-	$scope.settings = db.get('accessibility', {
-		'accessibility':false
-		//'dyslexic':false,
-		//'zoom':1
-	});
+	$scope.settings = JSON.parse(localStorage.getItem('accessibility'));
+	if (!$scope.settings) {
+		$scope.settings = {
+			'accessibility':false
+			//'dyslexic':false,
+			//'zoom':1
+		};
+	}
 
 	$scope.init = function() {
 		console.log('$accessibility.init()');
@@ -81,7 +84,7 @@ angular.module('io.modules')
 	};
 
 	$scope.save = function() {
-		db.set('accessibility', $scope.settings);
+		localStorage.setItem('accessibility', JSON.strinify($scope.settings));
 		console.log($scope.settings);
 	};
 
