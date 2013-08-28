@@ -1,7 +1,7 @@
 angular.module('io.modules')
 .controller('TemplateUrlCtrl', ['io.config', '$scope', '$routeParams', function(config, $scope, $routeParams) {
 	console.log('TemplateUrlCtrl (', $scope.$id, $routeParams.folder+'/'+$routeParams.page, ')');
-
+	config.views || (config.views = 'view/');
 	var views = config.views,
 		page = encodeURIComponent($routeParams.page) ,
 		folder = encodeURIComponent($routeParams.folder),
