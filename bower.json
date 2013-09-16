@@ -16,7 +16,7 @@
 	"dependencies": {
 		"angular": ">= 1.0.5",
 		"angular-mocks": ">= 1.0.5",
-		"bootstrap": "~3.0.1",
+		"bootstrap": "~3.0.0",
 		"open-dyslexic": null,
 		"marked": null
 	}
